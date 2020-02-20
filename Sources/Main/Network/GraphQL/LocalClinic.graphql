@@ -1,0 +1,24 @@
+mutation UpdateLocalClinic($id: ID!, $clinic: LocalClinicInput) {
+    update_local_clinic(id: $id, clinic: $clinic)
+}
+
+mutation CreateLocalClinic($clinic: LocalClinicInput) {
+    create_local_clinic(clinic: $clinic) {
+        ...LocalClinicDetails
+    }
+}
+
+query LocalClinics {
+    local_clinics {
+        ...LocalClinicDetails
+    }
+}
+
+fragment LocalClinicDetails on LocalClinic {
+    id
+    name
+    email
+    address
+    tel
+    fax
+}

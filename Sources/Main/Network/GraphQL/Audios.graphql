@@ -1,0 +1,40 @@
+query Audios($category: String!) {
+    audios(category: $category) {
+        ...AudioDetails
+    }
+}
+
+query AllAudio {
+    audios {
+        ...AudioDetails
+    }
+}
+
+query SingleAudio($id: ID!) {
+    audio(id: $id) {
+        ...AudioDetails
+        base64
+    }
+}
+
+mutation CreateAudio($audio: AudioInput) {
+    create_audio(audio: $audio) {
+        id
+        category
+        file_file_name
+        word_list
+        base64
+    }
+}
+
+mutation DeleteAudio($id: ID!) {
+    delete_audio(id: $id)
+}
+
+fragment AudioDetails on Audio {
+    category
+    file_file_name
+    id
+    word_list
+    alias
+}

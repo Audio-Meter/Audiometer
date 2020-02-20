@@ -1,0 +1,39 @@
+mutation UpdateProfile($profile: ProfileInput!) {
+    update_profile(profile: $profile)
+}
+
+
+query CommonProfile {
+    profile {
+        type
+    }
+}
+
+query ClinicProfile {
+    clinic_profile {
+        id
+        name
+        email
+        telephone
+        fax
+        address
+        website
+        type
+    }
+}
+
+query Profile {
+    profile {
+        type
+        ...profile_details
+        help_and_info
+        signature
+    }
+}
+
+# Fragments
+fragment profile_details on Profile {
+    icd_9
+    icd_10
+    help_and_info
+}

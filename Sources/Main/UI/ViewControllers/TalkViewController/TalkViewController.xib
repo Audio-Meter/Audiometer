@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TalkViewController" customModule="Audiometer" customModuleProvider="target">
+            <connections>
+                <outlet property="pushToTalk" destination="tVX-c0-gvK" id="XIy-rp-xPe"/>
+                <outlet property="view" destination="iN0-l3-epB" id="XyP-wg-kOd"/>
+                <outlet property="volume" destination="QZY-6C-bIB" id="XLA-yV-tfL"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tVX-c0-gvK">
+                    <rect key="frame" x="20" y="5" width="125" height="38"/>
+                    <color key="backgroundColor" red="0.61960784310000006" green="0.047058823530000002" blue="0.058823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="125" id="8eL-jm-XF2"/>
+                        <constraint firstAttribute="height" constant="38" id="ILR-NI-yds"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="PUSH TO TALK">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="3"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="QZY-6C-bIB">
+                    <rect key="frame" x="155" y="10.5" width="220" height="29"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="220" id="kQe-i9-lc9"/>
+                    </constraints>
+                    <segments>
+                        <segment title="Low"/>
+                        <segment title="Medium"/>
+                        <segment title="High"/>
+                    </segments>
+                    <color key="tintColor" red="0.5568627451" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </segmentedControl>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="QZY-6C-bIB" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="HYp-uc-DkH"/>
+                <constraint firstItem="QZY-6C-bIB" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="YC9-hS-arJ"/>
+                <constraint firstItem="tVX-c0-gvK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="ipE-Cb-ZOj"/>
+                <constraint firstItem="QZY-6C-bIB" firstAttribute="leading" secondItem="tVX-c0-gvK" secondAttribute="trailing" constant="10" id="jjK-4r-uVS"/>
+                <constraint firstItem="tVX-c0-gvK" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="nf3-iE-y0b"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="34.5" y="-126.5"/>
+        </view>
+    </objects>
+</document>

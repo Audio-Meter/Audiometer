@@ -1,0 +1,30 @@
+
+mutation CreateClinician($clinician: ClinicianInput) {
+    create_clinician(clinician: $clinician) {
+        ...ClinicianDetails
+    }
+}
+
+mutation UpdateClinician($id: ID!, $clinician: ClinicianInput) {
+    update_clinician(id: $id, clinician: $clinician)
+}
+
+
+query Clinicians {
+    clinicians {
+        ...ClinicianDetails
+    }
+}
+
+fragment ClinicianDetails on Clinician {
+    id
+    name
+    email
+    degrees
+    certification
+    pcp
+    clinics {
+        name
+    }
+    disabled
+}

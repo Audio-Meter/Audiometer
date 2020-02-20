@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TransducerPickerController" customModule="Audiometer" customModuleProvider="target">
+            <connections>
+                <outlet property="control" destination="iN0-l3-epB" id="Nc2-cn-QnH"/>
+                <outlet property="icon" destination="MB1-ZA-sq0" id="ELW-44-Hu5"/>
+                <outlet property="label" destination="g58-Wf-L1o" id="00Q-bj-wm3"/>
+                <outlet property="picker" destination="nKX-Mu-16w" id="Ego-pE-pNO"/>
+                <outlet property="view" destination="iN0-l3-epB" id="sEd-H9-mCV"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BlankField" customModule="Audiometer" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="167" height="38"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label Label Label Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g58-Wf-L1o">
+                    <rect key="frame" x="14" y="10" width="112.5" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="06" translatesAutoresizingMaskIntoConstraints="NO" id="MB1-ZA-sq0">
+                    <rect key="frame" x="134.5" y="11.5" width="15" height="15"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="15" id="eGA-w3-CFu"/>
+                        <constraint firstAttribute="width" constant="15" id="oFi-SY-4XP"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="g58-Wf-L1o" secondAttribute="bottom" constant="10" id="FOt-9s-e1O"/>
+                <constraint firstItem="MB1-ZA-sq0" firstAttribute="centerY" secondItem="g58-Wf-L1o" secondAttribute="centerY" id="ais-db-NkY"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="MB1-ZA-sq0" secondAttribute="trailing" constant="17.5" id="jiw-lD-lC5"/>
+                <constraint firstItem="g58-Wf-L1o" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="14" id="lVx-WN-Xzd"/>
+                <constraint firstItem="g58-Wf-L1o" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="ukJ-gF-gdp"/>
+                <constraint firstItem="MB1-ZA-sq0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="g58-Wf-L1o" secondAttribute="trailing" constant="8" id="zzt-e6-yIb"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                    <integer key="value" value="1"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                    <integer key="value" value="3"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <point key="canvasLocation" x="-2" y="-236"/>
+        </view>
+        <pickerView contentMode="scaleToFill" id="nKX-Mu-16w">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <point key="canvasLocation" x="-38" y="-55"/>
+        </pickerView>
+    </objects>
+    <resources>
+        <image name="06" width="32" height="32"/>
+    </resources>
+</document>

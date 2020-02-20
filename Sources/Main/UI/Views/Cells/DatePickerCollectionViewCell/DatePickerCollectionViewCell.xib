@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DatePickerCollectionViewCell" id="ieD-WZ-1re" customClass="DatePickerCollectionViewCell" customModule="Audiometer" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="284" height="72"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="284" height="72"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CON-Mu-x5a">
+                        <rect key="frame" x="0.0" y="36" width="284" height="36"/>
+                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                    </textField>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QpP-qr-hWh">
+                        <rect key="frame" x="0.0" y="0.0" width="284" height="72"/>
+                        <connections>
+                            <action selector="showDatePicker" destination="ieD-WZ-1re" eventType="touchUpInside" id="nYB-8v-xEJ"/>
+                        </connections>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rn4-bM-fk3">
+                        <rect key="frame" x="0.0" y="71" width="284" height="1"/>
+                        <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="RZe-5B-FzH"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="CON-Mu-x5a" firstAttribute="height" secondItem="ieD-WZ-1re" secondAttribute="height" multiplier="0.5" id="1X9-eX-ZvW"/>
+                <constraint firstItem="QpP-qr-hWh" firstAttribute="leading" secondItem="ieD-WZ-1re" secondAttribute="leading" id="56U-UW-V7z"/>
+                <constraint firstAttribute="trailing" secondItem="CON-Mu-x5a" secondAttribute="trailing" id="A0a-uA-dsx"/>
+                <constraint firstAttribute="bottom" secondItem="QpP-qr-hWh" secondAttribute="bottom" id="Dqz-y5-gLn"/>
+                <constraint firstItem="QpP-qr-hWh" firstAttribute="top" secondItem="ieD-WZ-1re" secondAttribute="top" id="foM-ld-7Gw"/>
+                <constraint firstAttribute="trailing" secondItem="Rn4-bM-fk3" secondAttribute="trailing" id="fu8-Kl-3tT"/>
+                <constraint firstItem="Rn4-bM-fk3" firstAttribute="leading" secondItem="ieD-WZ-1re" secondAttribute="leading" id="iW6-7E-lxJ"/>
+                <constraint firstAttribute="trailing" secondItem="QpP-qr-hWh" secondAttribute="trailing" id="ql5-dr-M37"/>
+                <constraint firstAttribute="bottom" secondItem="Rn4-bM-fk3" secondAttribute="bottom" id="twj-0x-aTO"/>
+                <constraint firstAttribute="bottom" secondItem="CON-Mu-x5a" secondAttribute="bottom" id="wQp-23-bfH"/>
+                <constraint firstItem="CON-Mu-x5a" firstAttribute="leading" secondItem="ieD-WZ-1re" secondAttribute="leading" id="x18-IO-qP7"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="eFX-QX-tbH"/>
+            <size key="customSize" width="284" height="72"/>
+            <connections>
+                <outlet property="separatorView" destination="Rn4-bM-fk3" id="qrJ-fG-i7k"/>
+                <outlet property="textField" destination="CON-Mu-x5a" id="TuM-cE-BRl"/>
+            </connections>
+            <point key="canvasLocation" x="6" y="46"/>
+        </collectionViewCell>
+    </objects>
+</document>

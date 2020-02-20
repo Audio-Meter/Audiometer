@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TextFieldCollectionViewCell" id="gTV-IL-0wX" customClass="TextFieldCollectionViewCell" customModule="Audiometer" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="284" height="72"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="284" height="72"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P4f-fx-zT3">
+                        <rect key="frame" x="0.0" y="36" width="284" height="36"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                    </textField>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oje-ru-NMP">
+                        <rect key="frame" x="0.0" y="71" width="284" height="1"/>
+                        <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="eub-Y3-JEk"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="P4f-fx-zT3" secondAttribute="trailing" id="LGU-Kr-sQm"/>
+                <constraint firstItem="Oje-ru-NMP" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Q5l-EV-c82"/>
+                <constraint firstAttribute="bottom" secondItem="Oje-ru-NMP" secondAttribute="bottom" id="i6n-17-zVg"/>
+                <constraint firstAttribute="bottom" secondItem="P4f-fx-zT3" secondAttribute="bottom" id="iY2-6k-Og4"/>
+                <constraint firstItem="P4f-fx-zT3" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.5" id="oWk-vF-klJ"/>
+                <constraint firstItem="P4f-fx-zT3" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="wAu-V2-wlC"/>
+                <constraint firstAttribute="trailing" secondItem="Oje-ru-NMP" secondAttribute="trailing" id="yhu-Ua-ice"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="284" height="72"/>
+            <connections>
+                <outlet property="separatorView" destination="Oje-ru-NMP" id="7S8-WV-Dqy"/>
+                <outlet property="textField" destination="P4f-fx-zT3" id="SvJ-NC-kVH"/>
+            </connections>
+            <point key="canvasLocation" x="4.7999999999999998" y="45.877061469265371"/>
+        </collectionViewCell>
+    </objects>
+</document>

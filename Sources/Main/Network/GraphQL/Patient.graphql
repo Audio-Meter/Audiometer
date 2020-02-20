@@ -1,0 +1,71 @@
+mutation CreatePatient($patient: PatientInput) {
+    create_patient(patient: $patient) {
+        ...PatientDetails
+    }
+}
+
+mutation DeletePatient($id: ID!) {
+    delete_patient(id: $id)
+}
+
+mutation UpdatePatient($id: ID!, $patient: PatientInput) {
+    update_patient(id: $id, patient: $patient)
+}
+
+mutation CreatePatientReport($patient_id: ID!, $patient_report: ReportInput, $signs: [SignInput], $rptfiles: [RptfileInput]) {
+    create_report(patient_id: $patient_id, report: $patient_report, signs: $signs, files: $rptfiles) {
+        report_url
+    }
+}
+
+query Patient($id: ID!) {
+    patient(id: $id) {
+        ...PatientDetails
+        tests {
+            ...TestDetails
+        }
+    }
+}
+
+query Patients {
+    patients {
+        ...PatientDetails
+    }
+}
+
+fragment PatientDetails on Patient {
+    city
+    created_at
+    date_of_birth
+    first_name
+    gender
+    patient_id
+    id
+    last_name
+    mailing_address_1
+    mailing_address_2
+    phone_number
+    state
+    updated_at
+    zip
+    email
+    insurance
+    ssn
+    icd_9
+    icd_10
+}
+
+fragment TestDetails on Test {
+    comment
+    created_at
+    id
+    kind
+    result
+    updated_at
+}
+
+mutation CreateTest($patient_id: ID!, $test: TestInput) {
+    create_test(patient_id: $patient_id, test: $test) {
+        id
+    }
+}

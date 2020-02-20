@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="SegmentedCollectionViewCell" customModule="Audiometer" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="451" height="108"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="451" height="108"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="EYd-Oa-3fs">
+                        <rect key="frame" x="0.0" y="63" width="401" height="41"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="DqH-ao-e1P"/>
+                        </constraints>
+                        <segments>
+                            <segment title=""/>
+                            <segment title=""/>
+                        </segments>
+                        <color key="tintColor" red="0.29411764709999999" green="0.52549019610000003" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </segmentedControl>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fGq-LS-b9k">
+                        <rect key="frame" x="0.0" y="0.0" width="436" height="63"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.46666666666666667" green="0.46666666666666667" blue="0.46666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c7n-PD-kty">
+                        <rect key="frame" x="0.0" y="107" width="451" height="1"/>
+                        <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="NU1-GJ-duh"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="fGq-LS-b9k" secondAttribute="trailing" constant="15" id="7ir-Lm-aL7"/>
+                <constraint firstItem="c7n-PD-kty" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="8D3-sM-lsM"/>
+                <constraint firstItem="fGq-LS-b9k" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="8f3-Hi-j6J"/>
+                <constraint firstAttribute="trailing" secondItem="c7n-PD-kty" secondAttribute="trailing" id="KsK-FP-yAs"/>
+                <constraint firstAttribute="bottom" secondItem="c7n-PD-kty" secondAttribute="bottom" id="MX5-bJ-8j5"/>
+                <constraint firstItem="EYd-Oa-3fs" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="N55-o1-rZl"/>
+                <constraint firstAttribute="bottom" secondItem="EYd-Oa-3fs" secondAttribute="bottom" constant="5" id="cjx-un-2OL"/>
+                <constraint firstItem="fGq-LS-b9k" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="lnd-O2-pxa"/>
+                <constraint firstItem="EYd-Oa-3fs" firstAttribute="top" secondItem="fGq-LS-b9k" secondAttribute="bottom" id="mXp-wp-TcF"/>
+                <constraint firstAttribute="trailing" secondItem="EYd-Oa-3fs" secondAttribute="trailing" constant="50" id="ojC-NT-JIe"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="451" height="108"/>
+            <connections>
+                <outlet property="segmentedControl" destination="EYd-Oa-3fs" id="OsN-2g-pY7"/>
+                <outlet property="titleLabel" destination="fGq-LS-b9k" id="PUY-FC-shS"/>
+            </connections>
+            <point key="canvasLocation" x="70.5" y="83"/>
+        </collectionViewCell>
+    </objects>
+</document>

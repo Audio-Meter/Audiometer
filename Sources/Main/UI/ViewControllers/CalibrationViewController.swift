@@ -1,0 +1,259 @@
+//
+//  CalibrationViewController.swift
+//  Audiometer
+//
+//  Created by Sergey Kachan on 2/5/18.
+//  Copyright © 2018 Sergey Kachan. All rights reserved.
+//
+
+import UIKit
+import LGButton
+import RxSwift
+import RxCocoa
+
+class CalibrationViewController: BaseViewController {
+    @IBOutlet var type: UISegmentedControl!
+    @IBOutlet var pan: ChannelsView!
+    @IBOutlet var frequency: UISegmentedControl!
+
+    @IBOutlet weak var typeCollectionView: UICollectionView!
+    @IBOutlet weak var stepCollectionView: UICollectionView!
+    @IBOutlet weak var frequencyCollectionView: UICollectionView!
+    @IBOutlet weak var lnrCollectionView: UICollectionView!
+    
+    @IBOutlet var step: UISegmentedControl!
+    @IBOutlet var increment: UIButton!
+    @IBOutlet var decrement: UIButton!
+
+    @IBOutlet var play: LGButton!
+    @IBOutlet var save: LGButton!
+    @IBOutlet var restore: LGButton!
+
+    @IBOutlet var transducerPlace: UILabel!
+
+    let tonePlayer = TonePlayer()
+    let wordPlayer = WordPlayer()
+    let noisePlayer = MaskingPlayer()
+    
+    
+
+    let transducerController = TransducerPickerController()
+
+    @IBOutlet weak var lblVersion: UILabel!
+    var typeIndexpath: IndexPath = IndexPath(row: 0, section: 0)
+    var lrIndexpath: IndexPath = IndexPath(row: 0, section: 0)
+    var frequencyIndexpath: IndexPath = IndexPath(row: 0, section: 0)
+    var stepIndexpath: IndexPath = IndexPath(row: 0, section: 0)
+    
+        
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        appDelegate.isFromCalibration = true
+        
+        transducerController.attach(to: transducerPlace)
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "CLOSE", style: .plain, target: self, action: #selector(closeAction))
+        
+        if let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String {
+            lblVersion.text = "Version: \(appVersion)\n"
+            
+        }
+        
+        if let bundleVersion = Bundle.main.infoDictionary!["CFBundleVersion"] as? String {
+            lblVersion.text = lblVersion.text! + "Build: \(bundleVersion)"
+            
+        }
+        //let image = UIImage(named:"ringSelected.png")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+
+        //self.type.setBackgroundImage(image, for: .selected, barMetrics: .default)
+        //self.type.backgroundImage(for: .selected, barMetrics: .default)
+    }
+    
+    @objc func closeAction() {
+        if let navigationController = self.navigationController {
+            navigationController.dismiss(animated: true, completion: nil)
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    class var viewController: CalibrationViewController {
+        let storyboard = UIStoryboard.mainStoryboard
+        return storyboard.instantiateViewController(withIdentifier: "calibration") as! CalibrationViewController
+    }
+}
+
+extension CalibrationViewController: Bindable {
+    func bind(model: CalibrationPage) {
+//        pan.bind(model: model.conductionIdea)
+        transducerController.bind(model: model.transducerModel)
+        
+        
+        
+        frequency.titles = model.frequencies
+        
+        let items = Observable.just(model.types)
+        items
+            .bind(to: self.typeCollectionView.rx.items) { (collectionView, row, element) in
+           let indexPath = IndexPath(row: row, section: 0)
+           let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CalibrationCollectionViewCell", for: indexPath) as! CalibrationCollectionViewCell
+                cell.subTitle.text = element
+                cell.selectedImage.image = indexPath == self.typeIndexpath ? UIImage(named: "01") : UIImage(named: "02")
+            return cell
+        }.disposed(by: disposeBag)
+        
+        typeCollectionView
+            .rx.itemSelected.bind(to: model.typeIndex).disposed(by: disposeBag)
+         
+        model.typeIndex.asObservable().subscribe { (event) in
+            if let item = event.element{
+                self.typeIndexpath = item
+                self.typeCollectionView.reloadData()
+            }
+        }.disposed(by: disposeBag)
+        
+//        type.rx.value <||> model.typeIndex ||> disposeBag
+//        frequency.rx.value <||> model.frequencyIndex ||> disposeBag
+//        step.rx.value <||> model.stepIndex ||> disposeBag
+        
+        let frequencies = Observable.just(model.frequencies)
+        frequencies
+            .bind(to: self.frequencyCollectionView.rx.items) { (collectionView, row, element) in
+           let indexPath = IndexPath(row: row, section: 0)
+           let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CalibrationCollectionViewCell", for: indexPath) as! CalibrationCollectionViewCell
+                cell.subTitle.text = element
+                cell.selectedImage.image = indexPath == self.frequencyIndexpath ? UIImage(named: "01") : UIImage(named: "02")
+            return cell
+        }.disposed(by: disposeBag)
+        
+        frequencyCollectionView
+            .rx.itemSelected.bind(to: model.frequencyIndex).disposed(by: disposeBag)
+        
+        model.frequencyIndex.asObservable().subscribe { (event) in
+            if let item = event.element{
+                self.frequencyIndexpath = item
+                self.frequencyCollectionView.reloadData()
+            }
+        }.disposed(by: disposeBag)
+        
+        
+        let steps = Observable.just(model.steps)
+        steps
+            .bind(to: self.stepCollectionView.rx.items) { (collectionView, row, element) in
+           let indexPath = IndexPath(row: row, section: 0)
+           let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CalibrationCollectionViewCell", for: indexPath) as! CalibrationCollectionViewCell
+                cell.subTitle.text = "\(element)"
+                cell.selectedImage.image = indexPath == self.stepIndexpath ? UIImage(named: "01") : UIImage(named: "02")
+            return cell
+        }.disposed(by: disposeBag)
+        
+        stepCollectionView
+            .rx.itemSelected.bind(to: model.stepIndex).disposed(by: disposeBag)
+        
+        model.stepIndex.asObservable().subscribe { (event) in
+            if let item = event.element{
+                self.stepIndexpath = item
+                self.stepCollectionView.reloadData()
+            }
+        }.disposed(by: disposeBag)
+
+        let conductionModel = model.conductionIdea
+        
+        let channels = Observable.just(["L","R"])
+        channels
+            .bind(to: self.lnrCollectionView.rx.items) { (collectionView, row, element) in
+           let indexPath = IndexPath(row: row, section: 0)
+           let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CalibrationCollectionViewCell", for: indexPath) as! CalibrationCollectionViewCell
+                cell.subTitle.text = element
+                cell.selectedImage.image = indexPath == self.lrIndexpath ? UIImage(named: "01") : UIImage(named: "02")
+            return cell
+        }.disposed(by: disposeBag)
+        
+        lnrCollectionView.rx.itemSelected.bind(to: conductionModel.conductionIndexPath).disposed(by: disposeBag)
+        
+        conductionModel.conductionIndexPath.asObservable().subscribe { (event) in
+                if let item = event.element{
+                    self.lrIndexpath = item
+                    self.lnrCollectionView.reloadData()
+                }
+        }.disposed(by: disposeBag)
+        
+        conductionModel.type ||> disposeBag
+            
+        
+    
+        
+//left.rx.tap ||> { .left } ||> model.channel ||> disposeBag
+//right.rx.tap ||> { .right } ||> model.channel ||> disposeBag
+//model.left ||> Styles.button.updateImage ||> left ||> disposeBag
+//model.right ||> Styles.button.updateImage ||> right ||> disposeBag
+        
+        model.isFrequencyEnabled ||> frequencyCollectionView.rx.isUserInteractionEnabled ||> disposeBag
+        model.frequencyDidDisabled ||> model.setDefaultFrequency ||> disposeBag
+        model.isFrequencyEnabled.asObservable().subscribe { (success) in
+            if let item = success.element {
+                self.frequencyCollectionView.alpha = item == true ? 1.0 : 0.5
+            }
+        }.disposed(by: disposeBag)
+        
+        
+
+        
+        
+         
+
+        increment.rx.tap ||> model.increment ||> model.put ||> disposeBag
+        decrement.rx.tap ||> model.decrement ||> model.put ||> disposeBag
+
+        
+                
+        
+        
+        
+        
+
+        let audio = AudioManager(players: tonePlayer, wordPlayer, noisePlayer)
+        self ||> audio ||> disposeBag
+        model.isTonePlaying ||> tonePlayer.played ||> disposeBag //TODO: Kill me
+        model.toneConfigs ||> tonePlayer.settings ||> disposeBag
+        model.wordConfigs ||> wordPlayer ||> disposeBag //10th Jan Change for new speech
+        model.noiseConfigs ||> noisePlayer.rx.config ||> disposeBag
+
+        play.rx.tap ||> model.play.toggle ||> disposeBag
+        model.play.styles ||> play ||> disposeBag
+
+        model.loadedCalibration ||> model.calibration ||> disposeBag
+        save.rx.tap ||> model.save ||> disposeBag
+        restore.rx.tap ||> model.restore ||> disposeBag
+
+//        navigationItem.leftBarButtonItem!.rx.tap ||> model.save ||> disposeBag
+        navigationItem.leftBarButtonItem!.rx.tap ||> { [weak self] in self?.closeAction() } ||> disposeBag
+ 
+    }
+}
+
+extension CalibrationPage: PageViewModel {
+    func createController(router: Router) -> UIViewController {
+        return router.createController(page: self) as CalibrationViewController
+    }
+}
+
+extension CalibrationViewController : UICollectionViewDelegateFlowLayout {
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == frequencyCollectionView {
+            let totalCount = CGFloat(frequencyCollectionView.numberOfItems(inSection: 0))
+            let width:CGFloat = (UIScreen.main.bounds.width - 50) / totalCount
+            return CGSize(width: width, height: 92)
+        }else if collectionView == typeCollectionView{
+            let totalCount = CGFloat(6)
+            let width = (typeCollectionView.frame.width + 10)/totalCount
+            return CGSize(width: width - 10 , height: 92)
+        }
+        
+        return CGSize(width: 75, height: 92)
+    }
+    
+}
