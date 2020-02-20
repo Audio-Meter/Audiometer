@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CoreDataAudio" representedClassName="CoreDataAudio" syncable="YES" codeGenerationType="class">
+        <attribute name="beginTimePs" optional="YES" attributeType="Transformable"/>
+        <attribute name="category" optional="YES" attributeType="String"/>
+        <attribute name="data" optional="YES" attributeType="Binary"/>
+        <attribute name="endTimePs" optional="YES" attributeType="Transformable"/>
+        <attribute name="fileName" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="txtFileName" optional="YES" attributeType="String"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="wordList" optional="YES" attributeType="Transformable"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreDataUser"/>
+    </entity>
+    <entity name="CoreDataLocalClinic" representedClassName="CoreDataLocalClinic" syncable="YES" codeGenerationType="class">
+        <attribute name="address" optional="YES" attributeType="String"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="fax" optional="YES" attributeType="String"/>
+        <attribute name="logo" optional="YES" attributeType="Binary"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="server_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="signature" optional="YES" attributeType="Binary"/>
+        <attribute name="sync" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="tel" optional="YES" attributeType="String"/>
+        <attribute name="user_id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="website" optional="YES" attributeType="String"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreDataUser"/>
+    </entity>
+    <entity name="CoreDataLocalClinician" representedClassName="CoreDataLocalClinician" syncable="YES" codeGenerationType="class">
+        <attribute name="certification" optional="YES" attributeType="String"/>
+        <attribute name="degrees" optional="YES" attributeType="String"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="pcp" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="server_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="signature" optional="YES" attributeType="Binary"/>
+        <attribute name="sync" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="user_id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreDataUser"/>
+    </entity>
+    <entity name="CoreDataUser" representedClassName="CoreDataUser" syncable="YES" codeGenerationType="class">
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="password" optional="YES" attributeType="String"/>
+        <attribute name="server_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="token" optional="YES" attributeType="String"/>
+        <attribute name="valid" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+    </entity>
+    <elements>
+        <element name="CoreDataAudio" positionX="361.23046875" positionY="203.33203125" width="128" height="193"/>
+        <element name="CoreDataLocalClinic" positionX="15.87109375" positionY="-66.2421875" width="128" height="225"/>
+        <element name="CoreDataLocalClinician" positionX="-54" positionY="54" width="128" height="195"/>
+        <element name="CoreDataUser" positionX="199.68359375" positionY="-14.88671875" width="128" height="120"/>
+    </elements>
+</model>

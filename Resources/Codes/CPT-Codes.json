@@ -1,0 +1,21 @@
+[
+ {"title": "CPT: 92551 Screening Test Pure Tone Only"},
+ {"title": "CPT: 92552 Pure Tone Audiometry (Treshold) Air Only"},
+ {"title": "CPT: 92555 Speech audiometry threshold"},
+ {"title": "CPT: 92556 Speech audiometry threshold with speech recognition"},
+ {"title": "CPT: 92557 Comprehensive audiometry threshold evaluation and speech recognition (92553 and 92556 combined)"},
+ {"title": "CPT: 92562 Loudness balance test, alternate binaural or monaural"},
+ {"title": "CPT: 92563 Tone decay test"},
+ {"title": "CPT: 92565 Stenger test, pure tone"},
+ {"title": "CPT: 92571 Filtered speech test"},
+ {"title": "CPT: 92572 Staggered spondaic word test (SSW)"},
+ {"title": "CPT: 92576 Synthetic sentence identification test (SSI)"},
+ {"title": "CPT: 92577 Stenger test, speech"},
+ {"title": "CPT: 92579 Visual reinforcement audiometry (VRA)"},
+ {"title": "CPT: 92582 Conditioning play audiometry"},
+ {"title": "CPT: 92583 Select picture audiometry"},
+ {"title": "CPT: 92596 Ear protector attenuation measures"},
+ {"title": "CPT: 92620 Evaluation of central auditory function, with report; initial 60 minutes"},
+ {"title": "CPT: 92621 Evaluation of central auditory function, with report; each additional 15 minutes"},
+ {"title": "CPT: 92625 Assessment of tinnitus (includes pitch, loudness matching and masking)"}
+]

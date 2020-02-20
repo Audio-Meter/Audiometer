@@ -1,0 +1,773 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="05w-Ku-i1n">
+    <device id="ipad9_7" orientation="landscape" layout="fullscreen" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="CenturyGothic-Bold.ttf">
+            <string>CenturyGothic-Bold</string>
+        </array>
+        <array key="CenturyGothic.ttf">
+            <string>CenturyGothic</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Select Clinic and Clinicians-->
+        <scene sceneID="0Je-5g-kMI">
+            <objects>
+                <viewController title="Select Clinic and Clinicians" modalPresentationStyle="fullScreen" id="nN5-6Q-HZ5" customClass="ClinicClinicianViewController" customModule="Audiometer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="04q-zO-Dj9">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sED-4L-7Wf" userLabel="LeftSide">
+                                <rect key="frame" x="0.0" y="100" width="508" height="668"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BBO-Ga-UCR" userLabel="List">
+                                        <rect key="frame" x="8" y="0.0" width="177" height="668"/>
+                                        <subviews>
+                                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Q3Y-XV-uUZ">
+                                                <rect key="frame" x="0.0" y="0.0" width="177" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="7AJ-l2-aC5"/>
+                                                </constraints>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </searchBar>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JTJ-q1-g8p">
+                                                <rect key="frame" x="0.0" y="50" width="177" height="562"/>
+                                                <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <prototypes>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="localClinicListCellId" id="aFU-kc-JkL" customClass="ClinicCell" customModule="Audiometer">
+                                                        <rect key="frame" x="0.0" y="28" width="177" height="50"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aFU-kc-JkL" id="BOo-XR-vxS">
+                                                            <rect key="frame" x="0.0" y="0.0" width="177" height="50"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="isd-oL-XIr">
+                                                                    <rect key="frame" x="46" y="14.5" width="123" height="21"/>
+                                                                    <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fBF-gh-zue" customClass="BEMCheckBox">
+                                                                    <rect key="frame" x="8" y="10" width="30" height="30"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="tintColor" red="0.29411764709999999" green="0.52549019610000003" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="30" id="9Rk-dS-9fV"/>
+                                                                        <constraint firstAttribute="height" constant="30" id="Ksw-RM-3MY"/>
+                                                                    </constraints>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" red="0.29411764709999999" green="0.52549019610000003" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="onCheckColor">
+                                                                            <color key="value" red="0.29411764709999999" green="0.52549019610000003" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="onTintColor">
+                                                                            <color key="value" red="0.29411764709999999" green="0.52549019610000003" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </view>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="fBF-gh-zue" firstAttribute="centerY" secondItem="BOo-XR-vxS" secondAttribute="centerY" id="5sM-qr-CqP"/>
+                                                                <constraint firstAttribute="trailing" secondItem="isd-oL-XIr" secondAttribute="trailing" constant="8" id="BQS-Pf-fhK"/>
+                                                                <constraint firstItem="fBF-gh-zue" firstAttribute="leading" secondItem="BOo-XR-vxS" secondAttribute="leading" constant="8" id="I0j-hC-cQY"/>
+                                                                <constraint firstItem="isd-oL-XIr" firstAttribute="leading" secondItem="fBF-gh-zue" secondAttribute="trailing" constant="8" id="nH6-Fc-jaZ"/>
+                                                                <constraint firstItem="isd-oL-XIr" firstAttribute="centerY" secondItem="fBF-gh-zue" secondAttribute="centerY" id="yVo-Vl-i35"/>
+                                                            </constraints>
+                                                        </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="checkbox" destination="fBF-gh-zue" id="Ozq-bJ-pAa"/>
+                                                            <outlet property="nameField" destination="isd-oL-XIr" id="gD3-gg-dGE"/>
+                                                        </connections>
+                                                    </tableViewCell>
+                                                </prototypes>
+                                            </tableView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TAm-oo-61E">
+                                                <rect key="frame" x="4" y="620" width="169" height="40"/>
+                                                <color key="backgroundColor" red="0.29411764705882354" green="0.52549019607843139" blue="0.70588235294117641" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="R34-ps-47g"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="17"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Add Clinic"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="addClinicClicked:" destination="nN5-6Q-HZ5" eventType="touchUpInside" id="fHo-a3-VCY"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="TAm-oo-61E" secondAttribute="trailing" constant="4" id="2Og-ec-9j2"/>
+                                            <constraint firstItem="JTJ-q1-g8p" firstAttribute="leading" secondItem="BBO-Ga-UCR" secondAttribute="leading" id="MEI-Q4-HRM"/>
+                                            <constraint firstAttribute="trailing" secondItem="JTJ-q1-g8p" secondAttribute="trailing" id="Ouj-VM-PXB"/>
+                                            <constraint firstAttribute="trailing" secondItem="Q3Y-XV-uUZ" secondAttribute="trailing" id="fFe-Yj-W4g"/>
+                                            <constraint firstItem="TAm-oo-61E" firstAttribute="top" secondItem="JTJ-q1-g8p" secondAttribute="bottom" constant="8" id="gHf-VT-GUT"/>
+                                            <constraint firstItem="Q3Y-XV-uUZ" firstAttribute="leading" secondItem="BBO-Ga-UCR" secondAttribute="leading" id="nhh-Wd-kj7"/>
+                                            <constraint firstItem="Q3Y-XV-uUZ" firstAttribute="top" secondItem="BBO-Ga-UCR" secondAttribute="top" id="oKR-jb-p0w"/>
+                                            <constraint firstAttribute="bottom" secondItem="TAm-oo-61E" secondAttribute="bottom" constant="8" id="s93-GJ-zWU"/>
+                                            <constraint firstItem="JTJ-q1-g8p" firstAttribute="top" secondItem="Q3Y-XV-uUZ" secondAttribute="bottom" id="wQd-xC-ixA"/>
+                                            <constraint firstItem="TAm-oo-61E" firstAttribute="leading" secondItem="BBO-Ga-UCR" secondAttribute="leading" constant="4" id="xfu-uR-fsv"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Ab-nt-heJ" userLabel="Detail">
+                                        <rect key="frame" x="193" y="0.0" width="315" height="668"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Clinic Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4nE-2K-vcy">
+                                                <rect key="frame" x="8" y="34.5" width="299" height="34"/>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits" textContentType="name"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Clinic Website" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0bx-pr-Ct7">
+                                                <rect key="frame" x="8" y="103" width="299" height="34"/>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits" textContentType="url"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Telephone" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mHo-AY-X2k">
+                                                <rect key="frame" x="8" y="171.5" width="299" height="34"/>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits" textContentType="tel"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </textField>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="J5E-Ww-ZkR">
+                                                <rect key="frame" x="8" y="308.5" width="299" height="50"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="wiq-zw-O2d"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" textContentType="street-address"/>
+                                                <dataDetectorType key="dataDetectorTypes" address="YES"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </textView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clinic Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="psX-Cl-W0f">
+                                                <rect key="frame" x="8" y="8" width="299" height="18.5"/>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Website" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lTH-aB-JJy">
+                                                <rect key="frame" x="8" y="76.5" width="299" height="18.5"/>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Telephone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nb6-To-mxX">
+                                                <rect key="frame" x="8" y="145" width="299" height="18.5"/>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fax" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K8K-zG-v02">
+                                                <rect key="frame" x="8" y="213.5" width="299" height="18.5"/>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3B-lW-9ld">
+                                                <rect key="frame" x="8" y="282" width="299" height="18.5"/>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bj1-by-Z9s">
+                                                <rect key="frame" x="8" y="381" width="100" height="31"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="7EZ-EV-D6g"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                                                <state key="normal" title="Edit Signature">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="editClinicSigniture:" destination="nN5-6Q-HZ5" eventType="touchUpInside" id="Hfl-PQ-T55"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bl7-38-Mak">
+                                                <rect key="frame" x="57.5" y="542.5" width="200" height="40"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="200" id="dzy-Cm-UtY"/>
+                                                    <constraint firstAttribute="height" constant="40" id="fAU-Tp-eof"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="17"/>
+                                                <color key="tintColor" red="0.29411764709999999" green="0.52549019610000003" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <state key="normal" title="Save"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="saveClinicClicked:" destination="nN5-6Q-HZ5" eventType="touchUpInside" id="PrR-tP-9kx"/>
+                                                </connections>
+                                            </button>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0Fx-S7-LVw">
+                                                <rect key="frame" x="116" y="366.5" width="191" height="60"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="TEy-vV-36a"/>
+                                                </constraints>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSB-EW-baC">
+                                                <rect key="frame" x="8" y="469" width="100" height="31"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="pBD-L2-zth"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                                                <state key="normal" title="Edit Logo">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="editLogo:" destination="nN5-6Q-HZ5" eventType="touchUpInside" id="c3N-SG-W4e"/>
+                                                </connections>
+                                            </button>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iXy-3y-gll" userLabel="LogoView">
+                                                <rect key="frame" x="116" y="434.5" width="191" height="100"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="2hZ-iB-G3t"/>
+                                                </constraints>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ulo-7C-FA9">
+                                                <rect key="frame" x="57.5" y="606.5" width="200" height="40"/>
+                                                <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="17"/>
+                                                <state key="normal" title="Delete">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="clinicDeleteBtnClicked:" destination="nN5-6Q-HZ5" eventType="touchUpInside" id="OP0-Id-SGz"/>
+                                                </connections>
+                                            </button>
+                                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Fax" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dbT-gk-zps">
+                                                <rect key="frame" x="8" y="240" width="299" height="34"/>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits" textContentType="tel"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.84313725490196079" green="0.84313725490196079" blue="0.84313725490196079" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="K8K-zG-v02" firstAttribute="leading" secondItem="3Ab-nt-heJ" secondAttribute="leading" constant="8" id="1GB-A1-lYK"/>
+                                            <constraint firstAttribute="trailing" secondItem="0Fx-S7-LVw" secondAttribute="trailing" constant="8" id="1Hc-e7-pcQ"/>
+                                            <constraint firstItem="0Fx-S7-LVw" firstAttribute="top" secondItem="J5E-Ww-ZkR" secondAttribute="bottom" constant="8" id="1h5-ul-vsB"/>
+                                            <constraint firstItem="lTH-aB-JJy" firstAttribute="leading" secondItem="3Ab-nt-heJ" secondAttribute="leading" constant="8" id="3ax-LO-hU6"/>
+                                            <constraint firstItem="Nb6-To-mxX" firstAttribute="top" secondItem="0bx-pr-Ct7" secondAttribute="bottom" constant="8" id="3mI-k9-56y"/>
+                                            <constraint firstAttribute="trailing" secondItem="psX-Cl-W0f" secondAttribute="trailing" constant="8" id="3nN-PB-dWJ"/>
+                                            <constraint firstItem="dbT-gk-zps" firstAttribute="leading" secondItem="3Ab-nt-heJ" secondAttribute="leading" constant="8" id="4d0-Kk-i6T"/>
+                                            <constraint firstAttribute="trailing" secondItem="iXy-3y-gll" secondAttribute="trailing" constant="8" id="5GV-dB-cNx"/>
+                                            <constraint firstItem="0bx-pr-Ct7" firstAttribute="leading" secondItem="3Ab-nt-heJ" secondAttribute="leading" constant="8" id="5N6-mL-ayT"/>
+                                            <constraint firstItem="0Fx-S7-LVw" firstAttribute="centerY" secondItem="bj1-by-Z9s" secondAttribute="centerY" id="5ek-kK-50e"/>
+                                            <constraint firstItem="dbT-gk-zps" firstAttribute="top" secondItem="K8K-zG-v02" secondAttribute="bottom" constant="8" id="D9i-P0-hnP"/>
+                                            <constraint firstItem="bj1-by-Z9s" firstAttribute="leading" secondItem="3Ab-nt-heJ" secondAttribute="leading" constant="8" id="DTu-DZ-tMV"/>
+                                            <constraint firstItem="lTH-aB-JJy" firstAttribute="top" secondItem="4nE-2K-vcy" secondAttribute="bottom" constant="8" id="DeL-E2-Py9"/>
+                                            <constraint firstItem="ulo-7C-FA9" firstAttribute="height" secondItem="bl7-38-Mak" secondAttribute="height" id="EW0-ra-E7s"/>
+                                            <constraint firstAttribute="trailing" secondItem="K8K-zG-v02" secondAttribute="trailing" constant="8" id="F8f-Np-xjX"/>
+                                            <constraint firstItem="psX-Cl-W0f" firstAttribute="leading" secondItem="3Ab-nt-heJ" secondAttribute="leading" constant="8" id="Fks-96-6rx"/>
+                                            <constraint firstItem="iXy-3y-gll" firstAttribute="leading" secondItem="tSB-EW-baC" secondAttribute="trailing" constant="8" id="JOR-M9-WAS"/>
+                                            <constraint firstItem="mHo-AY-X2k" firstAttribute="top" secondItem="Nb6-To-mxX" secondAttribute="bottom" constant="8" id="KjO-fS-KOd"/>
+                                            <constraint firstAttribute="trailing" secondItem="4nE-2K-vcy" secondAttribute="trailing" constant="8" id="L2a-kh-GkS"/>
+                                            <constraint firstItem="bl7-38-Mak" firstAttribute="top" secondItem="iXy-3y-gll" secondAttribute="bottom" constant="8" id="NP6-hf-x3N"/>
+                                            <constraint firstItem="bl7-38-Mak" firstAttribute="centerX" secondItem="3Ab-nt-heJ" secondAttribute="centerX" id="OKH-KH-qgj"/>
+                                            <constraint firstAttribute="trailing" secondItem="dbT-gk-zps" secondAttribute="trailing" constant="8" id="Ps2-OL-ZhU"/>
+                                            <constraint firstAttribute="trailing" secondItem="J5E-Ww-ZkR" secondAttribute="trailing" constant="8" id="PxS-0R-LbJ"/>
+                                            <constraint firstItem="psX-Cl-W0f" firstAttribute="top" secondItem="3Ab-nt-heJ" secondAttribute="top" constant="8" id="RMC-Fr-wfF"/>
+                                            <constraint firstItem="iXy-3y-gll" firstAttribute="top" secondItem="0Fx-S7-LVw" secondAttribute="bottom" constant="8" id="UhY-7d-7ee"/>
+                                            <constraint firstAttribute="trailing" secondItem="lTH-aB-JJy" secondAttribute="trailing" constant="8" id="VkX-eN-EHr"/>
+                                            <constraint firstItem="tSB-EW-baC" firstAttribute="leading" secondItem="3Ab-nt-heJ" secondAttribute="leading" constant="8" id="Wzz-gh-N4w"/>
+                                            <constraint firstAttribute="trailing" secondItem="0bx-pr-Ct7" secondAttribute="trailing" constant="8" id="XEh-90-6yp"/>
+                                            <constraint firstItem="X3B-lW-9ld" firstAttribute="leading" secondItem="3Ab-nt-heJ" secondAttribute="leading" constant="8" id="XHv-m7-eUI"/>
+                                            <constraint firstItem="J5E-Ww-ZkR" firstAttribute="leading" secondItem="3Ab-nt-heJ" secondAttribute="leading" constant="8" id="Xzw-G9-fjf"/>
+                                            <constraint firstItem="Nb6-To-mxX" firstAttribute="leading" secondItem="3Ab-nt-heJ" secondAttribute="leading" constant="8" id="Yp9-CX-EBu"/>
+                                            <constraint firstItem="0Fx-S7-LVw" firstAttribute="leading" secondItem="bj1-by-Z9s" secondAttribute="trailing" constant="8" id="aH4-Ku-yLt"/>
+                                            <constraint firstItem="iXy-3y-gll" firstAttribute="centerY" secondItem="tSB-EW-baC" secondAttribute="centerY" id="bjV-Xe-AWF"/>
+                                            <constraint firstItem="K8K-zG-v02" firstAttribute="top" secondItem="mHo-AY-X2k" secondAttribute="bottom" constant="8" id="cyJ-9X-e0D"/>
+                                            <constraint firstAttribute="trailing" secondItem="X3B-lW-9ld" secondAttribute="trailing" constant="8" id="ffy-ES-GtH"/>
+                                            <constraint firstItem="ulo-7C-FA9" firstAttribute="centerX" secondItem="bl7-38-Mak" secondAttribute="centerX" id="gZa-Kw-FeZ"/>
+                                            <constraint firstItem="4nE-2K-vcy" firstAttribute="leading" secondItem="3Ab-nt-heJ" secondAttribute="leading" constant="8" id="gpe-Uk-CeV"/>
+                                            <constraint firstItem="ulo-7C-FA9" firstAttribute="width" secondItem="bl7-38-Mak" secondAttribute="width" id="gyT-jt-weP"/>
+                                            <constraint firstItem="J5E-Ww-ZkR" firstAttribute="top" secondItem="X3B-lW-9ld" secondAttribute="bottom" constant="8" id="h7b-6R-Ka5"/>
+                                            <constraint firstItem="X3B-lW-9ld" firstAttribute="top" secondItem="dbT-gk-zps" secondAttribute="bottom" constant="8" id="hOw-4E-ZZ1"/>
+                                            <constraint firstItem="mHo-AY-X2k" firstAttribute="leading" secondItem="3Ab-nt-heJ" secondAttribute="leading" constant="8" id="qdt-vI-QBk"/>
+                                            <constraint firstAttribute="trailing" secondItem="mHo-AY-X2k" secondAttribute="trailing" constant="8" id="rMI-3D-sXF"/>
+                                            <constraint firstItem="ulo-7C-FA9" firstAttribute="top" secondItem="bl7-38-Mak" secondAttribute="bottom" constant="24" id="s4s-z0-gVJ"/>
+                                            <constraint firstItem="4nE-2K-vcy" firstAttribute="top" secondItem="psX-Cl-W0f" secondAttribute="bottom" constant="8" id="tjU-5t-Hwr"/>
+                                            <constraint firstAttribute="trailing" secondItem="Nb6-To-mxX" secondAttribute="trailing" constant="8" id="tni-bY-5LY"/>
+                                            <constraint firstItem="0bx-pr-Ct7" firstAttribute="top" secondItem="lTH-aB-JJy" secondAttribute="bottom" constant="8" id="vXR-aa-yWz"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.84313725490196079" green="0.84313725490196079" blue="0.84313725490196079" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="3Ab-nt-heJ" firstAttribute="leading" secondItem="BBO-Ga-UCR" secondAttribute="trailing" constant="8" id="7Ne-Ud-ixl"/>
+                                    <constraint firstAttribute="bottom" secondItem="BBO-Ga-UCR" secondAttribute="bottom" id="SHm-rb-JPG"/>
+                                    <constraint firstItem="BBO-Ga-UCR" firstAttribute="leading" secondItem="sED-4L-7Wf" secondAttribute="leading" constant="8" id="TR9-oT-OKb"/>
+                                    <constraint firstAttribute="bottom" secondItem="3Ab-nt-heJ" secondAttribute="bottom" id="Y9i-G5-0hn"/>
+                                    <constraint firstItem="3Ab-nt-heJ" firstAttribute="width" secondItem="BBO-Ga-UCR" secondAttribute="width" multiplier="16:9" id="bbO-dF-RJi"/>
+                                    <constraint firstItem="BBO-Ga-UCR" firstAttribute="top" secondItem="sED-4L-7Wf" secondAttribute="top" id="biq-w5-IJu"/>
+                                    <constraint firstItem="3Ab-nt-heJ" firstAttribute="top" secondItem="sED-4L-7Wf" secondAttribute="top" id="eRQ-Il-qvq"/>
+                                    <constraint firstAttribute="trailing" secondItem="3Ab-nt-heJ" secondAttribute="trailing" id="kED-jc-yzg"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BG5-23-0BG" userLabel="RightSide">
+                                <rect key="frame" x="516" y="100" width="508" height="668"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DDH-oO-TqL" userLabel="List">
+                                        <rect key="frame" x="0.0" y="0.0" width="180" height="668"/>
+                                        <subviews>
+                                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Lj5-Cg-5zE">
+                                                <rect key="frame" x="0.0" y="0.0" width="180" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="S0C-b6-rTe"/>
+                                                </constraints>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </searchBar>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oTd-9P-5wu">
+                                                <rect key="frame" x="0.0" y="50" width="180" height="562"/>
+                                                <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <prototypes>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="localClinicianListCellId" id="gss-gq-zee" customClass="ClinicianCell" customModule="Audiometer" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="28" width="180" height="50"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gss-gq-zee" id="wLk-zG-6sb">
+                                                            <rect key="frame" x="0.0" y="0.0" width="180" height="50"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DVF-ej-0vN">
+                                                                    <rect key="frame" x="53" y="14.5" width="104" height="21"/>
+                                                                    <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="62G-jY-Upb" customClass="BEMCheckBox">
+                                                                    <rect key="frame" x="15" y="10" width="30" height="30"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="tintColor" red="0.29411764709999999" green="0.52549019610000003" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="30" id="E25-Mh-paH"/>
+                                                                        <constraint firstAttribute="height" constant="30" id="yEK-49-LKb"/>
+                                                                    </constraints>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" red="0.29411764709999999" green="0.52549019610000003" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="onCheckColor">
+                                                                            <color key="value" red="0.29411764709999999" green="0.52549019610000003" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="onTintColor">
+                                                                            <color key="value" red="0.29411764709999999" green="0.52549019610000003" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </view>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="DVF-ej-0vN" firstAttribute="leading" secondItem="62G-jY-Upb" secondAttribute="trailing" constant="8" id="24v-8d-HM9"/>
+                                                                <constraint firstItem="62G-jY-Upb" firstAttribute="centerY" secondItem="wLk-zG-6sb" secondAttribute="centerY" id="BzS-le-rP5"/>
+                                                                <constraint firstItem="DVF-ej-0vN" firstAttribute="centerY" secondItem="wLk-zG-6sb" secondAttribute="centerY" id="JDq-T2-lhs"/>
+                                                                <constraint firstItem="62G-jY-Upb" firstAttribute="leading" secondItem="wLk-zG-6sb" secondAttribute="leadingMargin" id="WT2-ht-8Rl"/>
+                                                                <constraint firstAttribute="trailingMargin" secondItem="DVF-ej-0vN" secondAttribute="trailing" constant="8" id="fff-Df-rTD"/>
+                                                            </constraints>
+                                                        </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="checkbox" destination="62G-jY-Upb" id="pgy-SW-2o9"/>
+                                                            <outlet property="nameField" destination="DVF-ej-0vN" id="Eq3-Qe-1MI"/>
+                                                        </connections>
+                                                    </tableViewCell>
+                                                </prototypes>
+                                            </tableView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ro7-kq-iyq">
+                                                <rect key="frame" x="4" y="620" width="172" height="40"/>
+                                                <color key="backgroundColor" red="0.29411764705882354" green="0.52549019607843139" blue="0.70588235294117641" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="hZ6-qZ-5ps"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="17"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Add Clinician"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="addClinicianClicked:" destination="nN5-6Q-HZ5" eventType="touchUpInside" id="RZm-L1-DeU"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="Lj5-Cg-5zE" firstAttribute="leading" secondItem="DDH-oO-TqL" secondAttribute="leading" id="26v-1B-UZa"/>
+                                            <constraint firstItem="ro7-kq-iyq" firstAttribute="top" secondItem="oTd-9P-5wu" secondAttribute="bottom" constant="8" id="8Xg-Zi-ZrT"/>
+                                            <constraint firstAttribute="bottom" secondItem="ro7-kq-iyq" secondAttribute="bottom" constant="8" id="FA0-PR-8Fw"/>
+                                            <constraint firstItem="oTd-9P-5wu" firstAttribute="top" secondItem="Lj5-Cg-5zE" secondAttribute="bottom" id="Gqa-7o-vv3"/>
+                                            <constraint firstItem="Lj5-Cg-5zE" firstAttribute="top" secondItem="DDH-oO-TqL" secondAttribute="top" id="TQK-ce-Tgk"/>
+                                            <constraint firstAttribute="trailing" secondItem="Lj5-Cg-5zE" secondAttribute="trailing" id="Uw6-Xm-NSi"/>
+                                            <constraint firstAttribute="trailing" secondItem="ro7-kq-iyq" secondAttribute="trailing" constant="4" id="Wsg-m7-eGp"/>
+                                            <constraint firstItem="ro7-kq-iyq" firstAttribute="leading" secondItem="DDH-oO-TqL" secondAttribute="leading" constant="4" id="bVu-1X-Jpz"/>
+                                            <constraint firstAttribute="trailing" secondItem="oTd-9P-5wu" secondAttribute="trailing" id="lUP-h8-gvv"/>
+                                            <constraint firstItem="oTd-9P-5wu" firstAttribute="leading" secondItem="DDH-oO-TqL" secondAttribute="leading" id="mA0-vO-VFy"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kqG-iH-Qp0" userLabel="Detail">
+                                        <rect key="frame" x="188" y="0.0" width="320" height="668"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clinician Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i3V-TT-49b">
+                                                <rect key="frame" x="8" y="8" width="304" height="18.5"/>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clinician Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bnc-P8-Fd0">
+                                                <rect key="frame" x="8" y="82.5" width="304" height="18.5"/>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Certification" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmH-47-KLr">
+                                                <rect key="frame" x="8" y="157" width="304" height="18.5"/>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Degrees" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XOh-aI-9sE">
+                                                <rect key="frame" x="8" y="231.5" width="304" height="18.5"/>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PCP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D2p-At-fQx">
+                                                <rect key="frame" x="8" y="306" width="304" height="18.5"/>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Clincian Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tzx-Dp-QUW">
+                                                <rect key="frame" x="8" y="34.5" width="304" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="Rsr-Bu-i3e"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits" textContentType="name"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Clinician Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tjz-1l-Pro">
+                                                <rect key="frame" x="8" y="109" width="304" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="rL5-r7-1r9"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits" textContentType="email"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Certification" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FxU-FY-0R0">
+                                                <rect key="frame" x="8" y="183.5" width="304" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="P8a-XK-lfy"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits" textContentType="name"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Degrees" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0jc-zr-bwj">
+                                                <rect key="frame" x="8" y="258" width="304" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="Fjo-wf-e3J"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits" textContentType="name"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </textField>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XBi-5y-SN2" customClass="BEMCheckBox">
+                                                <rect key="frame" x="8" y="332.5" width="30" height="30"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" red="0.29411764709999999" green="0.52549019610000003" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="VGf-Rf-FX3"/>
+                                                    <constraint firstAttribute="width" constant="30" id="xK6-mQ-9Yg"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" red="0.29411764709999999" green="0.52549019610000003" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="onCheckColor">
+                                                        <color key="value" red="0.29411764709999999" green="0.52549019610000003" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="onTintColor">
+                                                        <color key="value" red="0.29411764709999999" green="0.52549019610000003" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="onFillColor">
+                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="offFillColor">
+                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEb-mv-TyT">
+                                                <rect key="frame" x="60" y="477.5" width="200" height="40"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="KMU-xL-yJP"/>
+                                                    <constraint firstAttribute="width" constant="200" id="sbI-2a-316"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="17"/>
+                                                <color key="tintColor" red="0.29411764709999999" green="0.52549019610000003" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <state key="normal" title="Save"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="saveClinicianClicked:" destination="nN5-6Q-HZ5" eventType="touchUpInside" id="O8D-bA-gsa"/>
+                                                </connections>
+                                            </button>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RaC-HG-AKg">
+                                                <rect key="frame" x="8" y="409.5" width="304" height="60"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="6Z9-OC-Hcq"/>
+                                                </constraints>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xNJ-Yv-37J">
+                                                <rect key="frame" x="8" y="370.5" width="304" height="31"/>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                                                <state key="normal" title="Edit Signature">
+                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="editClinicianSigniture:" destination="nN5-6Q-HZ5" eventType="touchUpInside" id="x4p-Ul-OQT"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U0a-FS-dJx">
+                                                <rect key="frame" x="60" y="541.5" width="200" height="40"/>
+                                                <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="17"/>
+                                                <state key="normal" title="Delete">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="clinicianDeleteBtnClicked:" destination="nN5-6Q-HZ5" eventType="touchUpInside" id="eGV-p3-osS"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.84313725490196079" green="0.84313725490196079" blue="0.84313725490196079" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="U0a-FS-dJx" firstAttribute="width" secondItem="tEb-mv-TyT" secondAttribute="width" id="0NI-Vv-IyY"/>
+                                            <constraint firstAttribute="trailing" secondItem="i3V-TT-49b" secondAttribute="trailing" constant="8" id="1wj-rv-DgV"/>
+                                            <constraint firstItem="tEb-mv-TyT" firstAttribute="top" secondItem="RaC-HG-AKg" secondAttribute="bottom" constant="8" id="4cX-CR-Uhg"/>
+                                            <constraint firstItem="Tjz-1l-Pro" firstAttribute="leading" secondItem="kqG-iH-Qp0" secondAttribute="leading" constant="8" id="5HP-a5-3pk"/>
+                                            <constraint firstItem="XOh-aI-9sE" firstAttribute="leading" secondItem="kqG-iH-Qp0" secondAttribute="leading" constant="8" id="7Hg-ID-9s1"/>
+                                            <constraint firstAttribute="trailing" secondItem="D2p-At-fQx" secondAttribute="trailing" constant="8" id="86J-dC-UoQ"/>
+                                            <constraint firstItem="U0a-FS-dJx" firstAttribute="height" secondItem="tEb-mv-TyT" secondAttribute="height" id="8aI-UT-Qdq"/>
+                                            <constraint firstItem="tEb-mv-TyT" firstAttribute="centerX" secondItem="kqG-iH-Qp0" secondAttribute="centerX" id="AhL-kI-ybq"/>
+                                            <constraint firstItem="xNJ-Yv-37J" firstAttribute="leading" secondItem="kqG-iH-Qp0" secondAttribute="leading" constant="8" id="Boz-1Q-pa2"/>
+                                            <constraint firstAttribute="trailing" secondItem="FxU-FY-0R0" secondAttribute="trailing" constant="8" id="FhG-Qg-TGN"/>
+                                            <constraint firstAttribute="trailing" secondItem="xNJ-Yv-37J" secondAttribute="trailing" constant="8" id="GSp-8u-yMO"/>
+                                            <constraint firstItem="bnc-P8-Fd0" firstAttribute="leading" secondItem="kqG-iH-Qp0" secondAttribute="leading" constant="8" id="HVw-on-GAW"/>
+                                            <constraint firstItem="RaC-HG-AKg" firstAttribute="leading" secondItem="kqG-iH-Qp0" secondAttribute="leading" constant="8" id="Kzp-xb-P1Q"/>
+                                            <constraint firstAttribute="trailing" secondItem="wmH-47-KLr" secondAttribute="trailing" constant="8" id="L1S-ih-j6g"/>
+                                            <constraint firstItem="i3V-TT-49b" firstAttribute="leading" secondItem="kqG-iH-Qp0" secondAttribute="leading" constant="8" id="NiL-Kf-RIo"/>
+                                            <constraint firstItem="0jc-zr-bwj" firstAttribute="top" secondItem="XOh-aI-9sE" secondAttribute="bottom" constant="8" id="OEY-Ug-FM0"/>
+                                            <constraint firstItem="D2p-At-fQx" firstAttribute="top" secondItem="0jc-zr-bwj" secondAttribute="bottom" constant="8" id="PAK-gK-Wf8"/>
+                                            <constraint firstAttribute="trailing" secondItem="XOh-aI-9sE" secondAttribute="trailing" constant="8" id="Pq4-zb-pX5"/>
+                                            <constraint firstAttribute="trailing" secondItem="tzx-Dp-QUW" secondAttribute="trailing" constant="8" id="RM3-Bx-2VR"/>
+                                            <constraint firstItem="0jc-zr-bwj" firstAttribute="leading" secondItem="kqG-iH-Qp0" secondAttribute="leading" constant="8" id="UyO-13-AjV"/>
+                                            <constraint firstAttribute="trailing" secondItem="bnc-P8-Fd0" secondAttribute="trailing" constant="8" id="VDx-PA-fDA"/>
+                                            <constraint firstItem="wmH-47-KLr" firstAttribute="top" secondItem="Tjz-1l-Pro" secondAttribute="bottom" constant="8" id="Wfk-US-Z4x"/>
+                                            <constraint firstItem="tzx-Dp-QUW" firstAttribute="top" secondItem="i3V-TT-49b" secondAttribute="bottom" constant="8" id="WpN-jD-VaS"/>
+                                            <constraint firstItem="XBi-5y-SN2" firstAttribute="leading" secondItem="kqG-iH-Qp0" secondAttribute="leading" constant="8" id="fZl-kO-ImA"/>
+                                            <constraint firstItem="Tjz-1l-Pro" firstAttribute="top" secondItem="bnc-P8-Fd0" secondAttribute="bottom" constant="8" id="fem-gt-h2Q"/>
+                                            <constraint firstAttribute="trailing" secondItem="RaC-HG-AKg" secondAttribute="trailing" constant="8" id="gfx-Fg-Qdv"/>
+                                            <constraint firstItem="FxU-FY-0R0" firstAttribute="leading" secondItem="kqG-iH-Qp0" secondAttribute="leading" constant="8" id="gsm-HW-u7c"/>
+                                            <constraint firstAttribute="trailing" secondItem="0jc-zr-bwj" secondAttribute="trailing" constant="8" id="gtw-cZ-ah0"/>
+                                            <constraint firstItem="FxU-FY-0R0" firstAttribute="top" secondItem="wmH-47-KLr" secondAttribute="bottom" constant="8" id="kKQ-8m-z1t"/>
+                                            <constraint firstItem="XOh-aI-9sE" firstAttribute="top" secondItem="FxU-FY-0R0" secondAttribute="bottom" constant="8" id="lHI-TU-n0w"/>
+                                            <constraint firstItem="i3V-TT-49b" firstAttribute="top" secondItem="kqG-iH-Qp0" secondAttribute="top" constant="8" id="ljR-45-UYW"/>
+                                            <constraint firstItem="U0a-FS-dJx" firstAttribute="centerX" secondItem="tEb-mv-TyT" secondAttribute="centerX" id="mgT-3R-gTI"/>
+                                            <constraint firstItem="U0a-FS-dJx" firstAttribute="top" secondItem="tEb-mv-TyT" secondAttribute="bottom" constant="24" id="ne4-oM-6l3"/>
+                                            <constraint firstItem="RaC-HG-AKg" firstAttribute="top" secondItem="xNJ-Yv-37J" secondAttribute="bottom" constant="8" id="oav-Hv-YBD"/>
+                                            <constraint firstAttribute="trailing" secondItem="Tjz-1l-Pro" secondAttribute="trailing" constant="8" id="pQj-fR-sNG"/>
+                                            <constraint firstItem="XBi-5y-SN2" firstAttribute="top" secondItem="D2p-At-fQx" secondAttribute="bottom" constant="8" id="pyr-VN-ld8"/>
+                                            <constraint firstItem="xNJ-Yv-37J" firstAttribute="top" secondItem="XBi-5y-SN2" secondAttribute="bottom" constant="8" id="s5Z-72-sPU"/>
+                                            <constraint firstItem="D2p-At-fQx" firstAttribute="leading" secondItem="kqG-iH-Qp0" secondAttribute="leading" constant="8" id="tNI-Mg-Gwi"/>
+                                            <constraint firstItem="bnc-P8-Fd0" firstAttribute="top" secondItem="tzx-Dp-QUW" secondAttribute="bottom" constant="8" id="tQU-L9-CL7"/>
+                                            <constraint firstItem="tzx-Dp-QUW" firstAttribute="leading" secondItem="kqG-iH-Qp0" secondAttribute="leading" constant="8" id="thW-KR-QxG"/>
+                                            <constraint firstItem="wmH-47-KLr" firstAttribute="leading" secondItem="kqG-iH-Qp0" secondAttribute="leading" constant="8" id="uGY-ES-R0N"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.85372652582159614" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="DDH-oO-TqL" firstAttribute="leading" secondItem="BG5-23-0BG" secondAttribute="leading" id="8u3-lc-fEo"/>
+                                    <constraint firstAttribute="trailing" secondItem="kqG-iH-Qp0" secondAttribute="trailing" id="Aqa-Nn-hos"/>
+                                    <constraint firstAttribute="bottom" secondItem="kqG-iH-Qp0" secondAttribute="bottom" id="BOT-0W-krO"/>
+                                    <constraint firstItem="kqG-iH-Qp0" firstAttribute="leading" secondItem="DDH-oO-TqL" secondAttribute="trailing" constant="8" id="GOm-qK-dQx"/>
+                                    <constraint firstItem="kqG-iH-Qp0" firstAttribute="top" secondItem="BG5-23-0BG" secondAttribute="top" id="Hq9-p7-rev"/>
+                                    <constraint firstAttribute="bottom" secondItem="DDH-oO-TqL" secondAttribute="bottom" id="KtD-ng-9kF"/>
+                                    <constraint firstItem="DDH-oO-TqL" firstAttribute="top" secondItem="BG5-23-0BG" secondAttribute="top" id="Qzi-2n-WFJ"/>
+                                    <constraint firstItem="kqG-iH-Qp0" firstAttribute="width" secondItem="DDH-oO-TqL" secondAttribute="width" multiplier="16:9" id="bN8-Gu-qob"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clinics" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egR-yd-vUy">
+                                <rect key="frame" x="0.0" y="50" width="508" height="42"/>
+                                <color key="backgroundColor" red="0.84313725490196079" green="0.84313725490196079" blue="0.84313725490196079" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="CenturyGothic-Bold" family="Century Gothic" pointSize="17"/>
+                                <color key="textColor" red="0.29411764705882354" green="0.52549019607843139" blue="0.70588235294117641" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clinicians" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hXl-96-sAs">
+                                <rect key="frame" x="516" y="50" width="508" height="42"/>
+                                <color key="backgroundColor" red="0.84313725490196079" green="0.84313725490196079" blue="0.84313725490196079" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="CenturyGothic-Bold" family="Century Gothic" pointSize="17"/>
+                                <color key="textColor" red="0.29411764705882354" green="0.52549019607843139" blue="0.70588235294117641" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="sED-4L-7Wf" firstAttribute="leading" secondItem="bVw-43-Fb1" secondAttribute="leading" id="5xY-9y-Whm"/>
+                            <constraint firstItem="hXl-96-sAs" firstAttribute="top" secondItem="bVw-43-Fb1" secondAttribute="top" id="B4s-eE-6ww"/>
+                            <constraint firstItem="sED-4L-7Wf" firstAttribute="top" secondItem="bVw-43-Fb1" secondAttribute="top" constant="50" id="DyJ-vD-rdf"/>
+                            <constraint firstItem="egR-yd-vUy" firstAttribute="top" secondItem="bVw-43-Fb1" secondAttribute="top" id="Gbi-0g-y7O"/>
+                            <constraint firstItem="sED-4L-7Wf" firstAttribute="top" secondItem="egR-yd-vUy" secondAttribute="bottom" constant="8" id="OIK-pg-sN8"/>
+                            <constraint firstItem="hXl-96-sAs" firstAttribute="leading" secondItem="egR-yd-vUy" secondAttribute="trailing" constant="8" id="OKe-J0-23E"/>
+                            <constraint firstItem="BG5-23-0BG" firstAttribute="leading" secondItem="sED-4L-7Wf" secondAttribute="trailing" constant="8" id="R5G-F3-584"/>
+                            <constraint firstItem="hXl-96-sAs" firstAttribute="width" secondItem="egR-yd-vUy" secondAttribute="width" id="Wyn-9W-mok"/>
+                            <constraint firstItem="BG5-23-0BG" firstAttribute="width" secondItem="sED-4L-7Wf" secondAttribute="width" id="gQG-tX-2bJ"/>
+                            <constraint firstItem="egR-yd-vUy" firstAttribute="leading" secondItem="bVw-43-Fb1" secondAttribute="leading" id="gqi-aN-8FW"/>
+                            <constraint firstItem="bVw-43-Fb1" firstAttribute="bottom" secondItem="sED-4L-7Wf" secondAttribute="bottom" id="gzV-4t-CUU"/>
+                            <constraint firstItem="bVw-43-Fb1" firstAttribute="trailing" secondItem="BG5-23-0BG" secondAttribute="trailing" id="h8r-L2-szq"/>
+                            <constraint firstItem="BG5-23-0BG" firstAttribute="top" secondItem="bVw-43-Fb1" secondAttribute="top" constant="50" id="jiq-zO-bcb"/>
+                            <constraint firstItem="BG5-23-0BG" firstAttribute="top" secondItem="hXl-96-sAs" secondAttribute="bottom" constant="8" id="ki7-NZ-eH0"/>
+                            <constraint firstItem="bVw-43-Fb1" firstAttribute="bottom" secondItem="BG5-23-0BG" secondAttribute="bottom" id="kyo-tw-h4O"/>
+                            <constraint firstItem="bVw-43-Fb1" firstAttribute="trailing" secondItem="hXl-96-sAs" secondAttribute="trailing" id="mVE-Yj-1wW"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="bVw-43-Fb1"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Select Clinic and Clinicians" largeTitleDisplayMode="always" id="Zti-wQ-5aD">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="N8e-Oj-z3Y">
+                            <connections>
+                                <action selector="cancelClicked:" destination="nN5-6Q-HZ5" id="C0u-47-JJ7"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="UiG-rO-0rE">
+                            <connections>
+                                <action selector="doneClicked:" destination="nN5-6Q-HZ5" id="zaI-63-E78"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="certificationField" destination="FxU-FY-0R0" id="ThS-SD-msE"/>
+                        <outlet property="clinicAddressField" destination="J5E-Ww-ZkR" id="ApI-bz-W1g"/>
+                        <outlet property="clinicDeleteBtn" destination="ulo-7C-FA9" id="gAx-Oh-s2M"/>
+                        <outlet property="clinicFaxField" destination="dbT-gk-zps" id="afL-lZ-8wZ"/>
+                        <outlet property="clinicLogo" destination="iXy-3y-gll" id="Fkb-Ti-by2"/>
+                        <outlet property="clinicNameField" destination="4nE-2K-vcy" id="jyH-mv-S83"/>
+                        <outlet property="clinicPhoneField" destination="mHo-AY-X2k" id="h5M-cX-zJi"/>
+                        <outlet property="clinicSaveBtn" destination="bl7-38-Mak" id="CZm-ok-Ch7"/>
+                        <outlet property="clinicSignature" destination="0Fx-S7-LVw" id="srm-tE-MrP"/>
+                        <outlet property="clinicTableView" destination="JTJ-q1-g8p" id="v5H-eh-Njt"/>
+                        <outlet property="clinicWebsite" destination="0bx-pr-Ct7" id="e66-bm-V2S"/>
+                        <outlet property="clinicianDeleteBtn" destination="U0a-FS-dJx" id="I3c-7r-n5E"/>
+                        <outlet property="clinicianEmailField" destination="Tjz-1l-Pro" id="Ssm-Ig-yKX"/>
+                        <outlet property="clinicianNameField" destination="tzx-Dp-QUW" id="FgF-eD-a2o"/>
+                        <outlet property="clinicianSaveBtn" destination="tEb-mv-TyT" id="mN5-Na-Lca"/>
+                        <outlet property="clinicianSignature" destination="RaC-HG-AKg" id="3px-xY-geZ"/>
+                        <outlet property="clinicianTableView" destination="oTd-9P-5wu" id="YAU-I4-Lrf"/>
+                        <outlet property="degreesField" destination="0jc-zr-bwj" id="b4I-67-VN6"/>
+                        <outlet property="pcpField" destination="XBi-5y-SN2" id="AHn-2Q-EnQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qVx-Xq-fgD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="183.984375" y="28.90625"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="0gg-OT-Ad0">
+            <objects>
+                <navigationController storyboardIdentifier="SettingsNavigationController" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="05w-Ku-i1n" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6PS-Ws-Ohs">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="50"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="nN5-6Q-HZ5" kind="relationship" relationship="rootViewController" id="38e-cl-SPM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eJg-1M-b88" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-540.234375" y="28.90625"/>
+        </scene>
+    </scenes>
+</document>

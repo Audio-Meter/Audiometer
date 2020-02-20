@@ -1,0 +1,17 @@
+
+query Signs {
+    signs {
+        ...SignDetails
+    }
+}
+
+
+fragment SignDetails on Sign {
+    id
+    name
+    image
+}
+
+mutation UpdateSign($id: ID!, $sign: SignInput) {
+    update_sign(id: $id, sign: $sign)
+}

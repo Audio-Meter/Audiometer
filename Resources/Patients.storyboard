@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="R7l-R9-psJ">
+    <device id="ipad10_5" orientation="landscape" layout="fullscreen" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="CenturyGothic-Bold.ttf">
+            <string>CenturyGothic-Bold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Patients View Controller-->
+        <scene sceneID="zSp-Q4-Jeb">
+            <objects>
+                <viewController storyboardIdentifier="PatientsViewController" modalPresentationStyle="fullScreen" id="1yl-wA-4HD" customClass="PatientsViewController" customModule="Audiometer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="G4v-Lw-Xrv">
+                        <rect key="frame" x="0.0" y="0.0" width="1112" height="784"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SFk-tj-BHH">
+                                <rect key="frame" x="0.0" y="0.0" width="315" height="713"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="315" id="v9b-OD-5vX"/>
+                                </constraints>
+                                <color key="separatorColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" text="" placeholder="FIND PATIENT BY NAME" id="Bpv-Xm-Pcm">
+                                    <rect key="frame" x="0.0" y="0.0" width="315" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="1yl-wA-4HD" id="jIu-1S-mrm"/>
+                                    </connections>
+                                </searchBar>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="1sr-j6-TRq" customClass="BaseAudiometerCell" customModule="Audiometer" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="315" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1sr-j6-TRq" id="edR-Aj-mJR">
+                                            <rect key="frame" x="0.0" y="0.0" width="315" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.29411764709999999" green="0.52549019610000003" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q4p-Ua-S9G" userLabel="VView">
+                                <rect key="frame" x="315" y="0.0" width="4" height="784"/>
+                                <color key="backgroundColor" red="0.27635750170000001" green="0.52519088979999995" blue="0.71147829289999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="4" id="SWz-ML-SPj"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I6E-xq-0T9" userLabel="HView">
+                                <rect key="frame" x="0.0" y="713" width="315" height="1"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="XVJ-JV-Map"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VGL-7m-YVS">
+                                <rect key="frame" x="32.5" y="729" width="250" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="GNH-Lc-thJ"/>
+                                    <constraint firstAttribute="height" constant="40" id="dqG-AJ-AQw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="CenturyGothic-Bold" family="Century Gothic" pointSize="18"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="-9" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="ADD NEW PATIENT" image="AddPatient_New">
+                                    <color key="titleColor" red="0.29411764709999999" green="0.52549019610000003" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="medium" weight="bold"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.38740062710000001" green="0.61500144000000001" blue="0.76951164009999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="addNewPatientAction" destination="1yl-wA-4HD" eventType="touchUpInside" id="amd-0g-qfa"/>
+                                </connections>
+                            </button>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BFl-uY-A9r">
+                                <rect key="frame" x="319" y="0.0" width="793" height="784"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.29411764709999999" green="0.52549019610000003" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="F5F-qI-N1n" kind="embed" id="Hjq-fd-kcl"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Q4p-Ua-S9G" firstAttribute="leading" secondItem="SFk-tj-BHH" secondAttribute="trailing" id="3js-XC-CSg"/>
+                            <constraint firstAttribute="bottom" secondItem="VGL-7m-YVS" secondAttribute="bottom" constant="15" id="Gzh-fe-WEk"/>
+                            <constraint firstItem="I6E-xq-0T9" firstAttribute="trailing" secondItem="SFk-tj-BHH" secondAttribute="trailing" id="JhW-pd-aLH"/>
+                            <constraint firstAttribute="bottom" secondItem="BFl-uY-A9r" secondAttribute="bottom" id="Lhs-LS-5UF"/>
+                            <constraint firstItem="BFl-uY-A9r" firstAttribute="top" secondItem="G4v-Lw-Xrv" secondAttribute="top" id="NKz-TG-xsx"/>
+                            <constraint firstItem="SFk-tj-BHH" firstAttribute="top" secondItem="G4v-Lw-Xrv" secondAttribute="top" id="Py6-X3-tnM"/>
+                            <constraint firstItem="Q4p-Ua-S9G" firstAttribute="top" secondItem="G4v-Lw-Xrv" secondAttribute="top" id="XCu-oo-Y4B"/>
+                            <constraint firstItem="VGL-7m-YVS" firstAttribute="centerX" secondItem="SFk-tj-BHH" secondAttribute="centerX" id="b4f-we-AHq"/>
+                            <constraint firstItem="BFl-uY-A9r" firstAttribute="leading" secondItem="Q4p-Ua-S9G" secondAttribute="trailing" id="cT5-F4-XRA"/>
+                            <constraint firstItem="SFk-tj-BHH" firstAttribute="leading" secondItem="G4v-Lw-Xrv" secondAttribute="leading" id="caj-Uv-ugq"/>
+                            <constraint firstAttribute="bottom" secondItem="Q4p-Ua-S9G" secondAttribute="bottom" id="hcR-Xb-mjI"/>
+                            <constraint firstAttribute="trailing" secondItem="BFl-uY-A9r" secondAttribute="trailing" id="iAF-lp-g4X"/>
+                            <constraint firstItem="I6E-xq-0T9" firstAttribute="leading" secondItem="SFk-tj-BHH" secondAttribute="leading" id="rb8-ql-chb"/>
+                            <constraint firstItem="I6E-xq-0T9" firstAttribute="top" secondItem="SFk-tj-BHH" secondAttribute="bottom" id="sd7-Tf-Shk"/>
+                            <constraint firstItem="VGL-7m-YVS" firstAttribute="top" secondItem="I6E-xq-0T9" secondAttribute="bottom" constant="15" id="shX-Go-twp"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="TKA-P9-qdX"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="wLK-fb-TNA"/>
+                    <connections>
+                        <outlet property="searchBar" destination="Bpv-Xm-Pcm" id="sKE-n2-KsZ"/>
+                        <outlet property="tableView" destination="SFk-tj-BHH" id="is4-0z-bcG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z5l-2E-Czz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-64.748201438848923" y="-497.12230215827344"/>
+        </scene>
+        <!--Patients Info Container View Controller-->
+        <scene sceneID="L3m-On-plH">
+            <objects>
+                <viewController storyboardIdentifier="PatientsInfoContainerViewController" modalPresentationStyle="fullScreen" id="F5F-qI-N1n" customClass="PatientsInfoContainerViewController" customModule="Audiometer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xJO-gu-fW2">
+                        <rect key="frame" x="0.0" y="0.0" width="793" height="784"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f18-gq-KId" customClass="SegmentedControl" customModule="Audiometer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="793" height="75"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="Wud-EC-6JF"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="f18-gq-KId" firstAttribute="leading" secondItem="vCl-D3-bqc" secondAttribute="leading" id="6to-al-Wbh"/>
+                            <constraint firstItem="f18-gq-KId" firstAttribute="top" secondItem="xJO-gu-fW2" secondAttribute="top" id="Kn9-Vg-NAS"/>
+                            <constraint firstItem="vCl-D3-bqc" firstAttribute="trailing" secondItem="f18-gq-KId" secondAttribute="trailing" id="WTq-WO-vYh"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="vCl-D3-bqc"/>
+                    </view>
+                    <connections>
+                        <outlet property="segmentedControl" destination="f18-gq-KId" id="e0G-HK-rmd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Sb-AW-yeq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="556" y="-497"/>
+        </scene>
+        <!--Patient Details View Controller-->
+        <scene sceneID="hYW-qc-iTc">
+            <objects>
+                <viewController storyboardIdentifier="PatientDetailsViewController" modalPresentationStyle="fullScreen" id="GJJ-G3-9Ik" customClass="PatientDetailsViewController" customModule="Audiometer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="R6O-yn-E3a">
+                        <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ppn-IS-w9A">
+                                <rect key="frame" x="0.0" y="0.0" width="1112" height="774"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9VE-aU-Ani">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yBf-ZS-NXi">
+                                <rect key="frame" x="1024" y="782" width="80" height="36"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="e4I-c6-fQ9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Delete">
+                                    <color key="titleColor" red="0.29411764709999999" green="0.52549019610000003" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.29411764709999999" green="0.52549019610000003" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="deleteBtnClicked:" destination="GJJ-G3-9Ik" eventType="touchUpInside" id="Z1q-2P-fYQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="yBf-ZS-NXi" firstAttribute="top" secondItem="ppn-IS-w9A" secondAttribute="bottom" constant="8" id="30f-d2-kHf"/>
+                            <constraint firstItem="eIk-5R-3tX" firstAttribute="trailing" secondItem="yBf-ZS-NXi" secondAttribute="trailing" constant="8" id="4nn-kG-1nu"/>
+                            <constraint firstItem="ppn-IS-w9A" firstAttribute="top" secondItem="eIk-5R-3tX" secondAttribute="top" id="7oJ-6K-FQq"/>
+                            <constraint firstItem="ppn-IS-w9A" firstAttribute="leading" secondItem="eIk-5R-3tX" secondAttribute="leading" id="DHt-f5-wIJ"/>
+                            <constraint firstItem="ppn-IS-w9A" firstAttribute="trailing" secondItem="eIk-5R-3tX" secondAttribute="trailing" id="XTo-xC-oPP"/>
+                            <constraint firstItem="yBf-ZS-NXi" firstAttribute="bottom" secondItem="eIk-5R-3tX" secondAttribute="bottom" constant="-16" id="YEE-fO-oUE"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="eIk-5R-3tX"/>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="ppn-IS-w9A" id="hHH-lQ-A4W"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hoy-S5-wI6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-65" y="247"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="28h-0m-7wy">
+            <objects>
+                <navigationController storyboardIdentifier="PatientsInfoNavigationController" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="R7l-R9-psJ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="Gax-cc-vz9">
+                        <rect key="frame" x="0.0" y="0.0" width="1112" height="50"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.29411764705882354" green="0.52549019607843139" blue="0.70588235294117641" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" red="0.29411764705882354" green="0.52549019607843139" blue="0.70588235294117641" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="1yl-wA-4HD" kind="relationship" relationship="rootViewController" id="bjH-vC-OPp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d3M-do-hRM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-742" y="-497"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="AddPatient_New" width="24" height="24"/>
+    </resources>
+</document>

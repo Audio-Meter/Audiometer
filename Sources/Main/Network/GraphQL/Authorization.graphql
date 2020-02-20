@@ -1,0 +1,7 @@
+mutation Login($email: String!, $password: String!) {
+    login(email: $email, password: $password)
+}
+
+mutation ForgotPassword($email: String!) {
+    reset_password(email: $email)
+}

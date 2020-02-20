@@ -1,0 +1,4 @@
+
+mutation UpdateClinicProfile($clinic: ClinicInput) {
+    update_clinic(clinic: $clinic)
+}

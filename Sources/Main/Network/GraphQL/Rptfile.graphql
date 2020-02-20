@@ -1,0 +1,11 @@
+
+
+query Rptfiles {
+    rptfiles {
+        content
+    }
+}
+
+mutation UpdateRptfile($id: ID!, $rptfile: RptfileInput) {
+    update_rptfile(id: $id, rptfile: $rptfile)
+}
