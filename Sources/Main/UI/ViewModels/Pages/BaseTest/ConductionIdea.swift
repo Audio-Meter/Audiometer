@@ -10,7 +10,7 @@ import RxSwift
 
 class ConductionIdea {
     let conductionIndex = Variable(0)
-    let conductionIndexPath = Variable(IndexPath(row: 0, section: 0))
+    let conductionIndexPath = Variable([IndexPath(row: 0, section: 0)])
     let channel = Variable(Channel.left)
 
     var left: Observable<Bool> {
@@ -24,10 +24,12 @@ class ConductionIdea {
     
     var type: Observable<Void> {
         return conductionIndexPath.asObservable().map {
-            switch $0.row {
-            case 0: self.channel.value = .left
-            case 1: self.channel.value = .right
-            default: break
+            for i in $0{
+                switch i.row {
+                case 0: self.channel.value = .left
+                case 1: self.channel.value = .right
+                default: break
+                }
             }
         }
     }
