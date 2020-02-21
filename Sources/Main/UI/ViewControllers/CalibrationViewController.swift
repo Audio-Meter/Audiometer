@@ -41,7 +41,7 @@ class CalibrationViewController: BaseViewController {
 
     @IBOutlet weak var lblVersion: UILabel!
     var typeIndexpath: IndexPath = IndexPath(row: 0, section: 0)
-    var lrIndexpath: IndexPath = IndexPath(row: 0, section: 0)
+    var lrIndexpath: [IndexPath] = [IndexPath(row: 0, section: 0)]
     var frequencyIndexpath: IndexPath = IndexPath(row: 0, section: 0)
     var stepIndexpath: IndexPath = IndexPath(row: 0, section: 0)
     
@@ -166,29 +166,37 @@ extension CalibrationViewController: Bindable {
            let indexPath = IndexPath(row: row, section: 0)
            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CalibrationCollectionViewCell", for: indexPath) as! CalibrationCollectionViewCell
                 cell.subTitle.text = element
-                cell.selectedImage.image = indexPath == self.lrIndexpath ? UIImage(named: "01") : UIImage(named: "02")
+                if self.lrIndexpath.contains(indexPath){
+                    cell.selectedImage.image = UIImage(named: "01")
+                }else{
+                    cell.selectedImage.image = UIImage(named: "02")
+                }
             return cell
         }.disposed(by: disposeBag)
         
-        lnrCollectionView.rx.itemSelected.bind(to: conductionModel.conductionIndexPath).disposed(by: disposeBag)
-        
-        conductionModel.conductionIndexPath.asObservable().subscribe { (event) in
-                if let item = event.element{
-                    self.lrIndexpath = item
-                    self.lnrCollectionView.reloadData()
+        lnrCollectionView.rx.itemSelected.asObservable().subscribe { (event) in
+            if let item = event.element{
+                if self.lrIndexpath.filter({ $0.row == item.row}).count == 0{
+                    self.lrIndexpath.append(item)
+                    conductionModel.conductionIndexPath.value.append(item)
+                }else if self.lrIndexpath.count > 1, let index = self.lrIndexpath.index(of: item){
+                    self.lrIndexpath.remove(at: index)
+                    conductionModel.conductionIndexPath.value.remove(at: index)
                 }
+                   self.lnrCollectionView.reloadData()
+            }
+            
         }.disposed(by: disposeBag)
+        
+        
+        
+        
         
         conductionModel.type ||> disposeBag
             
         
     
-        
-//left.rx.tap ||> { .left } ||> model.channel ||> disposeBag
-//right.rx.tap ||> { .right } ||> model.channel ||> disposeBag
-//model.left ||> Styles.button.updateImage ||> left ||> disposeBag
-//model.right ||> Styles.button.updateImage ||> right ||> disposeBag
-        
+            
         model.isFrequencyEnabled ||> frequencyCollectionView.rx.isUserInteractionEnabled ||> disposeBag
         model.frequencyDidDisabled ||> model.setDefaultFrequency ||> disposeBag
         model.isFrequencyEnabled.asObservable().subscribe { (success) in
