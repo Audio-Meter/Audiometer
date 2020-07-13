@@ -233,11 +233,11 @@ extension CalibrationViewController: Bindable {
         }.disposed(by: disposeBag)
         
         
-        
-        
-        
         conductionModel.type ||> disposeBag
+            
         
+    
+            
         model.isFrequencyEnabled ||> frequencyCollectionView.rx.isUserInteractionEnabled ||> disposeBag
         model.frequencyDidDisabled ||> model.setDefaultFrequency ||> disposeBag
         model.isFrequencyEnabled.asObservable().subscribe { (success) in

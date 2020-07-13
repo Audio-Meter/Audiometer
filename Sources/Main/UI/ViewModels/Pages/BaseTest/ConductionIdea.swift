@@ -10,7 +10,7 @@ import RxSwift
 
 class ConductionIdea {
     let conductionIndex = Variable(0)
-    let conductionIndexPathTone = Variable(IndexPath(row: 0, section: 0))
+
     let conductionIndexPath = Variable([IndexPath(row: 0, section: 0)])
     let channel = Variable(Channel.left)
 
@@ -25,10 +25,6 @@ class ConductionIdea {
     
     var type: Observable<Void> {
         return conductionIndexPath.asObservable().map {
-            if $0.count == 2{
-                self.channel.value = .binaural
-                return
-            }
             for i in $0{
                 switch i.row {
                 case 0: self.channel.value = .left
