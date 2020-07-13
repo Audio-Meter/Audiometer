@@ -11,17 +11,32 @@ import Apollo
 import MessageUI
 import SafariServices
 import CoreData
+import AgoraRtmKit
 
-class MenuViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate {
+extension Notification.Name {
+    static let receiveCall = Notification.Name("receiveCall")
+    static let startCall = Notification.Name("startCall")
+}
+
+class MenuViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate, AgoraRtmDelegate, AgoraRtmChannelDelegate {
     
     //MARK: properties
     @IBOutlet weak var lblVersion: UILabel!
     @IBOutlet weak var rightColumn: UIView!
     @IBOutlet weak var menus: UITableView!
-
-    var container: PersistentContainer!
+    var peerId:String?
+    var rtmChannel: AgoraRtmChannel?
+    var callObsever:Any?
+    var isFirstLoadDone:Bool = false
     
-    var menuItems = ["TESTS", "CALIBRATION", "CLINIC & CLINICIANS", "IMPORT SPEECH FILES"]
+    var container: PersistentContainer!
+    var selectRemoteVC:SelectRemoteViewController?
+    
+    var menuItems = ["TESTS", "CALIBRATION", "CLINIC & CLINICIANS","CHANGE LANGUAGE"]
+    
+    //HideThe Import Speech File
+    //var menuItems = ["TESTS", "CALIBRATION", "CLINIC & CLINICIANS", "IMPORT SPEECH FILES"]
+    
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -38,6 +53,8 @@ class MenuViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         self.container = appDelegate.persistentContainer
 
+        callObsever = NotificationCenter.default.addObserver(self, selector: #selector(startCall), name: NSNotification.Name.startCall, object: nil)
+
         rightColumn.backgroundColor = ColorStyle.semiTransparentRed.apply()
         rightColumn.isHidden = true
         
@@ -52,7 +69,12 @@ class MenuViewController: BaseViewController, UITableViewDelegate, UITableViewDa
 
         // Load the setting menu if the login user is a Clinic
         // Otherwise load the clinician profile.
+        
+        
         User.current = User()
+        
+        loginUserToChat()
+        
 //        User.current?.getUserCategory {
 //            if let uc = User.current?.userCategory {
 //                if uc == UserCateogry.clinic {
@@ -63,6 +85,17 @@ class MenuViewController: BaseViewController, UITableViewDelegate, UITableViewDa
 //                }
 //            }
 //        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if isFirstLoadDone{
+            self.loginUserToChat()
+        }
+        if !isFirstLoadDone{
+            isFirstLoadDone = true
+        }
+        
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -85,6 +118,95 @@ class MenuViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         }
         return indexPath
     }
+    deinit {
+        if let call = callObsever{
+            NotificationCenter.default.removeObserver(call)
+        }
+    }
+    
+    @objc func startCall(_ notification:Notification){
+        self.confirmCallTapped()
+    }
+    
+    func loginUserToChat(){
+        
+        if let userEmail = Storage.currentUser(){
+            AgoraRtm.loginUser(userEmail) {  (errorCode) in
+            if let error = errorCode, error != .ok{
+                print("login error: \(error.rawValue)")
+                return
+                }
+                self.createChannelForChat(AppId.chatchannel)
+            }
+            AgoraRtm.updateKit(delegate: self)
+        }
+
+    }
+    
+    func rtmKit(_ kit: AgoraRtmKit, messageReceived message: AgoraRtmMessage, fromPeer peerId: String) {
+        AgoraRtm.add(offlineMessage: message, from: peerId)
+    }
+    
+    func createChannelForChat(_ channel:String){
+        AgoraRtm.joinChatChannel(forChannel: channel, delegate: self) { [weak self] (errorCode, rtmChannel) in
+            guard let rtmChannel = rtmChannel else{
+                print("Channel Already exists")
+                return
+            }
+            if let error = errorCode, error != .channelErrorOk{
+                print("join channel error: \(error.rawValue)")
+            }
+            self?.rtmChannel = rtmChannel
+        }
+    }
+    
+    func channel(_ channel: AgoraRtmChannel, memberJoined member: AgoraRtmMember) {
+        if member.userId.contains("patient"){
+            if let selectVc = selectRemoteVC{
+//                selectVc.hideView()
+            }
+        }
+    }
+    
+    func channel(_ channel: AgoraRtmChannel, memberLeft member: AgoraRtmMember) {
+        if member.userId.contains("patient"){
+            if let selectVc = selectRemoteVC{
+                selectVc.hideView()
+            }
+            
+        }
+    }
+    
+    func channel(_ channel: AgoraRtmChannel, messageReceived message: AgoraRtmMessage, from member: AgoraRtmMember) {
+        print("\(member.userId) says \(message.type)")
+        
+        self.peerId = member.userId
+        if let user = Storage.currentUser(){
+            
+            if let mem = member.userId.components(separatedBy: "-").first{
+                AgoraKit.createChannel("\(mem)\(user)")
+                AgoraKit.patientName = mem
+                _ = AgoraRtm.setChannel(channel: "\(mem)\(user)")
+            }
+            
+        }
+        if message.text == MessageHandling.start{
+            if (self.presentedViewController != nil){                
+                NotificationCenter.default.post(name: Notification.Name.receiveCall, object: self.rtmChannel)
+            }else{
+                selectRemoteVC = SelectRemoteViewController.viewController
+                selectRemoteVC?.callDelegate = self
+                selectRemoteVC?.channel = self.rtmChannel
+                DispatchQueue.main.async {
+                    self.selectRemoteVC?.showViewForParent(self)
+                }
+            }
+        }
+        
+    }
+    
+    
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -92,7 +214,7 @@ class MenuViewController: BaseViewController, UITableViewDelegate, UITableViewDa
 
         switch(indexPath.row) {
         case 0:
-                PatientsRouter.presentModalPatientsInfo(from: self)
+            PatientsRouter.presentModalPatientsInfo(from: self, rtmChannel: nil)
                 break;
         case 1:
             guard let userEmail = Storage.currentUser() else {
@@ -149,8 +271,12 @@ class MenuViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             SettingsRouter.presentModalSettings(from: self, container: container)
             break;
         case 3:
-            AudiosRouter.show(from: self)
-            break;
+            self.menus.deselectRow(at: indexPath, animated: true)
+             let ipadVC = iPadLanguageViewController.viewController
+            ipadVC.modalPresentationStyle = .fullScreen
+            self.present(ipadVC, animated: true, completion: nil)
+//            AudiosRouter.show(from: self)
+//            break;
         default:
             break
         }
@@ -165,13 +291,20 @@ class MenuViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         ApolloClient.reset()
         User.current = nil
         Storage.setCurrentUser("")
+        AgoraRtm.logout()
         UIApplication.shared.keyWindow?.rootViewController = LoginViewController.viewController
     }
     
     @IBAction func onHelpTapped(_ sender: Any) {
         if let url = User.current?.helpAndInfo.value {
-            let svc = SFSafariViewController(url: url)
-            self.present(svc, animated: true, completion: nil)
+            if ["http", "https"].contains(url.scheme?.lowercased() ?? "") {
+                // Can open with SFSafariViewController
+                let safariViewController = SFSafariViewController(url: url)
+                self.present(safariViewController, animated: true, completion: nil)
+            } else {
+                // Scheme is not supported or no scheme is given, use openURL
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
         }
     }
     
@@ -190,4 +323,37 @@ class MenuViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
     }
+}
+
+extension MenuViewController:CallDelegate{
+    func cancelTapped() {
+        
+    }
+    
+    
+    func confirmCallTapped() {
+        
+        self.rtmChannel?.send(AgoraRtmMessage(text: MessageHandling.confirm), completion: { (error) in
+            if error == .errorOk{
+                self.rtmChannel?.leave(completion: { (errorCode) in
+                    if errorCode == .ok{
+                        AgoraRtm.joinChatChannel(forChannel: AgoraRtm.chatChannel ?? "", delegate: self) { [weak self] (errorCode, rtmChannel) in
+                            guard let rtmChannel = rtmChannel else{
+                                print("Channel Already exists")
+                                return
+                            }
+                            if let error = errorCode, error != .channelErrorOk{
+                                print("join channel error: \(error.rawValue)")
+                            }
+                            DispatchQueue.main.async {
+                                self?.selectRemoteVC?.hideView()
+                                PatientsRouter.presentModalPatientsInfo(from: self!, rtmChannel: rtmChannel)
+                            }
+                        }
+                    }
+                })
+            }
+        })
+    }
+    
 }

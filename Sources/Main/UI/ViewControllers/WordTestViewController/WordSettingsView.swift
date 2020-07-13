@@ -12,18 +12,26 @@ import RxSwift
 class WordSettingsView: UIView {
     let disposeBag = DisposeBag()
 
+ 
+    
     @IBOutlet var channel: ChannelsView!
     @IBOutlet var conduction: UISegmentedControl!
+    
+    var selectCOllection : UICollectionView!
+    
     @IBOutlet var type: UISegmentedControl!
+    
+    
 }
 
 extension WordSettingsView {
     func bind(model: ConductionIdea) {
-        channel.bind(model: model)
-        conduction.rx.value <||> model.conductionIndex ||> disposeBag
+//        channel.bind(model: model)
+        //conduction.rx.value <||> model.conductionIndex ||> disposeBag
+        
     }
 
     func bind(model: WordPlayerIdea) {
-        type.rx.value <||> model.type ||> disposeBag
+//        type.rx.value <||> model.type ||> disposeBag
     }
 }

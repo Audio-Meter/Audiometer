@@ -4191,6 +4191,18 @@
               "description": "Speech",
               "isDeprecated": false,
               "deprecationReason": null
+            },
+            {
+              "name": "tinnitus",
+              "description": "Tinnitus",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "minicog",
+              "description": "Mini-Cog",
+              "isDeprecated": false,
+              "deprecationReason": null
             }
           ],
           "possibleTypes": null

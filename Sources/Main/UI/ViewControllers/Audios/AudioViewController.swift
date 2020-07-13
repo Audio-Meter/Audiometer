@@ -130,7 +130,7 @@ UITableViewDelegate, UITableViewDataSource {
     
     private func selectListRow(_ list: UITableView, _ index: IndexPath) {
         list.selectRow(at: index, animated: false,
-                       scrollPosition: UITableViewScrollPosition.bottom)
+                       scrollPosition: UITableView.ScrollPosition.bottom)
         
         self.tableView(list, didSelectRowAt: index)
     }

@@ -30,7 +30,7 @@ struct Word: Equatable, AudioFileDetails {
     var file: AKAudioFile {
         if localPath != nil {
             let fileURL = URL(fileURLWithPath: localPath!)
-            os_log("fileURL: %s", localPath!)
+//            os_log("fileURL: %s", localPath!)
             
             do {
                 let res = try AKAudioFile(forReading: fileURL)
@@ -63,16 +63,23 @@ struct Word: Equatable, AudioFileDetails {
     }
 
     static func ==(lhs: Word, rhs: Word) -> Bool {
+        
         return lhs.text == rhs.text
     }
     
     init(type: SpeechType, text: String, localPath: String? = nil, category: String?, startPos: Double, endPos: Double) {
-        self.localPath = localPath
+        
+       // let url = Bundle.main.url(forResource: text, withExtension: "wav")!
+       let url = Bundle.main.path(forResource: "\(text).wav", ofType:nil)
+      //  let Newurl = URL(fileURLWithPath: url)
+//       NSLog("Path is = \(url)")
+        self.localPath = url
         self.text = text
         self.type = type
         self.category = category
         self.timeStartPos = startPos
         self.timeEndPos = endPos
+//        print("Path is = \(url) start time : \(startPos) end time:\(endPos)")
     }
 }
 

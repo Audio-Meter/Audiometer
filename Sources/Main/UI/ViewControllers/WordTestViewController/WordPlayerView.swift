@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import AgoraRtmKit
 
 class WordPlayerView: UIView {
     var disposeBag = DisposeBag()
@@ -16,6 +17,8 @@ class WordPlayerView: UIView {
 
     var wordsProvider: WordTableProvider!
     let player = WordPlayer()
+
+    var currentConfig:WordConfig!
     
     func resetDisposeBag() {
         disposeBag = DisposeBag()
@@ -32,7 +35,32 @@ extension WordPlayerView: Bindable {
         model.test.playDidTapped ||> model.play ||> disposeBag
         model.typeChanged ||> model.stop ||> disposeBag
 
+        
+        if let channel = AgoraRtm.rtmChannel{
+            model.config.subscribe({ (config) in
+                self.sendRawMessage(config.element, channel: channel)
+            }).disposed(by: disposeBag)
+            
+        }else{
+          
+        }
         model.config ||> player ||> disposeBag
         model.test.playDidToggled ||> player.next ||> model.nextWord ||> disposeBag
+
+        
+                
+        
+    }
+    
+    func sendRawMessage(_ word:WordConfig?, channel:AgoraRtmChannel){
+        
+        if let sendSetting = word?.getWordSendSettings(), let data = sendSetting.getData(){
+            currentConfig = word
+            print("sent raw message \(sendSetting)")
+            let rawMessage = AgoraRtmRawMessage(rawData: data, description: "maskSetting")
+            channel.send(rawMessage) { (errorCode) in
+                
+            }
+        }
     }
 }

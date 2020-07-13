@@ -18,7 +18,7 @@ struct ButtonIdea {
     }
 
     static var stop: ButtonIdea {
-        return ButtonIdea(title: "Stop", icon: #imageLiteral(resourceName: "PauseIcon"))
+        return ButtonIdea(title: "Stop", icon: #imageLiteral(resourceName: "Stopicon"))
     }
 }
 

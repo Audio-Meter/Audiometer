@@ -32,7 +32,12 @@ struct Calibration {
 
     func fs(frequency: Int, dBHL: Int) -> Double {
         let fs = get(frequency)
-        let dBFS = UnitHelper.db(fs: fs) + Double(dBHL) - 70
-        return UnitHelper.fs(db: dBFS)
+        if AgoraRtm.rtmChannel == nil{
+            let dBFS = UnitHelper.db(fs: fs) + Double(dBHL) - 70
+            return UnitHelper.fs(db: dBFS)
+        }else{
+            let dBFS = UnitHelper.db(fs: fs) + Double(dBHL) - 70
+            return UnitHelper.fs(db: dBFS)
+        }        
     }
 }

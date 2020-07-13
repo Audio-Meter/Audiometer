@@ -13,13 +13,29 @@ enum SteppedType: Int {
     case slider, button
 }
 
+enum FrequencySteppedType: Int{
+    case button, slider
+}
+enum AmplitudeSteppedType: Int{
+    case slider, button
+}
+
+
 class SteppedViewModel {
-    let type: Variable<SteppedType>
+    let typeAmplitude: Variable<AmplitudeSteppedType>?
+    let typeFrequency: Variable<FrequencySteppedType>?
     let possibleValues: [Int]
     let index: Variable<Int>
 
     init(type: SteppedType = .slider, possibleValues: [Int], value: Int) {
-        self.type = Variable(.slider)
+        if type == .slider{
+            self.typeAmplitude = Variable(.slider)
+            self.typeFrequency = nil
+        }else{
+            self.typeAmplitude = nil
+            self.typeFrequency = Variable(.button)
+        }
+        
         self.possibleValues = possibleValues
         self.index = Variable(possibleValues.index(of: value) ?? 0)
     }
@@ -29,7 +45,13 @@ class SteppedViewModel {
     }
 
     var sliderSelected: Observable<Bool> {
-        return type.asObservable().map { $0 == .slider }
+        if let type = typeFrequency.value{
+            return type.asObservable().map { $0 == .slider }
+        }
+        if let type = typeAmplitude.value {
+            return type.asObservable().map { $0 == .slider }
+        }
+        return Variable(FrequencySteppedType.button).asObservable().map{ $0 == .slider }
     }
 
     var valueLabel: Observable<String> {

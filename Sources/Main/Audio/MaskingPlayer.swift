@@ -10,6 +10,28 @@ import AudioKit
 import RxSwift
 import RxCocoa
 
+
+struct MaskingTest :Codable{
+    
+    let amplitude:Double
+    let volume:Double
+    let audioFileName:String?
+    let isPlaying:Bool
+    let pan:Double
+    
+    func getData() -> Data?{
+        let encoder = JSONEncoder()
+        return try? encoder.encode(self)
+    }
+    
+    static func getToneSendSettings(fromData data:Data) -> MaskingTest?{
+        let decoder = JSONDecoder()
+        return try? decoder.decode(MaskingTest.self, from: data)
+    }
+    
+    
+}
+
 struct MaskingConfig: TestConfig {
     let isPlayed: Bool
     let dBHL: Int
@@ -54,6 +76,14 @@ struct MaskingConfig: TestConfig {
 
     var audioFile: AKAudioFile? {
         return type == .wn ? nil : type.file(frequency: frequency)
+    }
+    
+    var audioFileName:String?{
+        return type == .wn ? nil : type.fileName(frequency: frequency)
+    }
+    
+    func getMaskingSetting() -> MaskingTest{        
+        return MaskingTest(amplitude: self.wnAmplitude, volume: self.fileAmplitude, audioFileName: self.audioFileName, isPlaying: self.isFilePlaying, pan: self.pan)
     }
 }
 
@@ -101,8 +131,24 @@ class MaskingPlayer: AudioPlayer, ReactiveCompatible {
                 panner.pan = config.pan
             }
         }
-        
     }
+    
+    func update(_ test:MaskingTest){
+        wn.amplitude = test.amplitude
+        player.volume = test.volume
+        if let name = test.audioFileName, let audioFile = try? AKAudioFile(readFileName: name){
+            player.setAudioFile(audioFile)
+        }
+        
+        if test.pan == 0 {
+            player.volume = 0
+            wn.amplitude = 0
+        }
+
+        panner.pan = -test.pan        
+    }
+    
+    
 }
 
 extension Reactive where Base: MaskingPlayer {

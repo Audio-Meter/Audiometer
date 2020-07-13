@@ -247,7 +247,7 @@ class ClinicianViewController: UIViewController, UITableViewDelegate, UITableVie
         
         self.clinicianList.selectRow(at: indexPath,
                                      animated: false,
-                                     scrollPosition: UITableViewScrollPosition.bottom)
+                                     scrollPosition: UITableView.ScrollPosition.bottom)
         
         self.tableView(clinicianList, didSelectRowAt: indexPath)
     }

@@ -15,9 +15,22 @@ class MaskingIdea {
     let isContinuos = Variable(false)
     let amplitude = Variable(40)
     let type = Variable(MaskingType.wn)
+    let typeIndexPath = Variable(IndexPath(row: 4, section: 0)) 
 
     init(test: TestIdea) {
         self.test = test
+    }
+    
+    var typeVariable: Observable<Void> {
+        return typeIndexPath.asObservable().map {
+            switch $0.row {
+                case 0: self.type.value = MaskingType.wn
+                case 1: self.type.value = MaskingType.nbn
+                case 2: self.type.value = MaskingType.pn
+                case 3: self.type.value = MaskingType.sn
+                default: break
+            }
+        }
     }
 
     var isPlayed: Observable<Bool> {

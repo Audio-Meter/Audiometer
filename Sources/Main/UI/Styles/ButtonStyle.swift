@@ -23,6 +23,10 @@ struct ButtonStyle {
     static func solid() -> ButtonStyle {
         return normal().solid()
     }
+    static func Cleared()-> ButtonStyle
+    {
+        return normal().Cleared()
+    }
 
     static func bordered() -> ButtonStyle {
         return normal().bordered()
@@ -30,6 +34,7 @@ struct ButtonStyle {
 
     static func selected(_ value: Bool) -> ButtonStyle {
         let style = ButtonStyle()
+        
         return value ? style.solid() : style.bordered()
     }
 
@@ -45,6 +50,14 @@ struct ButtonStyle {
         style.textColor = .white
         style.borderWidth = 0
         return style
+    }
+func Cleared() -> ButtonStyle
+ {
+     var style = self
+         style.backgroundColor = ColorStyle.clear
+           style.textColor = .white
+           style.borderWidth = 0
+           return style
     }
 
     func bordered() -> ButtonStyle {

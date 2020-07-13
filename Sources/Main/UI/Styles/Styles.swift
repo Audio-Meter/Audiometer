@@ -17,7 +17,8 @@ enum Styles {
     static let textView = TextViewStyle.self
     static let lines = LineStyle.self
 
-    static func label(font: FontStyle = .normal, color: ColorStyle = .middleGray) -> LabelStyle {
+    static func label(font: FontStyle = .normal, color: ColorStyle = .black) -> LabelStyle {
         return LabelStyle(font: font, color: color, alignment: .left, vertical: false)
     }
+    
 }

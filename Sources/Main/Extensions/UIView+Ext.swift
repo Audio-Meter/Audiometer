@@ -46,9 +46,9 @@ extension UIView {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = align
         let string = NSAttributedString(string: text, attributes: [
-            NSAttributedStringKey.paragraphStyle: paragraphStyle,
-            NSAttributedStringKey.font: font,
-            NSAttributedStringKey.foregroundColor: color
+            NSAttributedString.Key.paragraphStyle: paragraphStyle,
+            NSAttributedString.Key.font: font,
+            NSAttributedString.Key.foregroundColor: color
         ])
         let offset = (align == .center ? width / 2 : 0)
         let rect = CGRect(x: x - offset, y: y, width: width, height: font.lineHeight)

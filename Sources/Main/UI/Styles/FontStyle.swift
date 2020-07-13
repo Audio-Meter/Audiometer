@@ -24,7 +24,8 @@ struct FontStyle {
     }
 
     //static let normal = family("SF Pro Text").size(14)
-    static let normal = family("Century Gothic").size(14)
+    static let normal = family("Century Gothic").size(18)
+    
     
     func size(_ value: CGFloat) -> FontStyle {
         return .wrap(descriptor.withSize(value))

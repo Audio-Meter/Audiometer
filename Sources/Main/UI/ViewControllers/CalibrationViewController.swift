@@ -10,8 +10,9 @@ import UIKit
 import LGButton
 import RxSwift
 import RxCocoa
+import AgoraRtmKit
 
-class CalibrationViewController: BaseViewController {
+class CalibrationViewController: BaseViewController, CallDelegate {
     @IBOutlet var type: UISegmentedControl!
     @IBOutlet var pan: ChannelsView!
     @IBOutlet var frequency: UISegmentedControl!
@@ -34,8 +35,8 @@ class CalibrationViewController: BaseViewController {
     let tonePlayer = TonePlayer()
     let wordPlayer = WordPlayer()
     let noisePlayer = MaskingPlayer()
-    
-    
+    var callObsever:Any?
+    var remoteVC:SelectRemoteViewController?
 
     let transducerController = TransducerPickerController()
 
@@ -51,9 +52,23 @@ class CalibrationViewController: BaseViewController {
         
         appDelegate.isFromCalibration = true
         
+        
+        
         transducerController.attach(to: transducerPlace)
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "CLOSE", style: .plain, target: self, action: #selector(closeAction))
+          let font = UIFont.systemFont(ofSize: 20)
+         let attrs = [
+                    NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Bold", size: 20)!
+                ]
+        
+         UINavigationBar.appearance().titleTextAttributes = attrs
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(closeAction))
+        
+        navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: font], for: .normal)
+        
+        navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: font], for: .normal)
+        
         
         if let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String {
             lblVersion.text = "Version: \(appVersion)\n"
@@ -68,6 +83,34 @@ class CalibrationViewController: BaseViewController {
 
         //self.type.setBackgroundImage(image, for: .selected, barMetrics: .default)
         //self.type.backgroundImage(for: .selected, barMetrics: .default)
+        callObsever = NotificationCenter.default.addObserver(self, selector: #selector(recieveCall), name: NSNotification.Name.receiveCall, object: nil)
+    }
+    
+    deinit {
+    if let call = callObsever{
+            NotificationCenter.default.removeObserver(call)
+        }
+    }
+    
+    @objc func recieveCall(_ notification:Notification){
+//        if self.navigationController?.topViewController == nil{
+            remoteVC = SelectRemoteViewController.viewController
+            if let channel = notification.object as? AgoraRtmChannel{
+                remoteVC?.channel = channel
+            }
+            DispatchQueue.main.async {
+                self.remoteVC?.showViewForParent(self)
+            }
+            remoteVC?.callDelegate = self
+//        }
+    }
+    func cancelTapped() {
+        
+    }
+    
+    func confirmCallTapped() {
+        self.closeAction()
+        NotificationCenter.default.post(name: Notification.Name.startCall, object: nil)
     }
     
     @objc func closeAction() {
@@ -161,6 +204,7 @@ extension CalibrationViewController: Bindable {
         let conductionModel = model.conductionIdea
         
         let channels = Observable.just(["L","R"])
+       
         channels
             .bind(to: self.lnrCollectionView.rx.items) { (collectionView, row, element) in
            let indexPath = IndexPath(row: row, section: 0)
@@ -187,9 +231,6 @@ extension CalibrationViewController: Bindable {
             }
             
         }.disposed(by: disposeBag)
-        
-        
-        
         
         
         conductionModel.type ||> disposeBag

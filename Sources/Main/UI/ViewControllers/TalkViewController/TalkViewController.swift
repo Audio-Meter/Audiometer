@@ -25,15 +25,16 @@ class TalkViewController: BaseViewController {
 
     func attach(to menu: UIView) {
         let parent = menu.viewContainingController()!
-        parent.addChildViewController(self)
-        parent.view.addSubview(view)
-        
+        parent.addChild(self)
+//        parent.view.addSubview(view)
+        menu.addSubview(view)
         NSLayoutConstraint.activate([
             view.leftAnchor.constraint(equalTo: menu.leftAnchor),
             view.topAnchor.constraint(equalTo: menu.topAnchor),
-            view.bottomAnchor.constraint(equalTo: menu.bottomAnchor)
+            view.bottomAnchor.constraint(equalTo: menu.bottomAnchor),
+            view.rightAnchor.constraint(equalTo: menu.rightAnchor)
         ])
-        didMove(toParentViewController: parent)
+        didMove(toParent: parent)
     }
 }
 

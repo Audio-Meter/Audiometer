@@ -26,7 +26,7 @@ class TransducerPickerController: BaseViewController {
 
     func attach(to placeholder: UIView) {
         let parent = placeholder.viewContainingController()!
-        parent.addChildViewController(self)
+        parent.addChild(self)
         parent.view.addSubview(view)
         
         NSLayoutConstraint.activate([
@@ -36,7 +36,7 @@ class TransducerPickerController: BaseViewController {
             view.topAnchor.constraint(equalTo: placeholder.topAnchor),
             view.bottomAnchor.constraint(equalTo: placeholder.bottomAnchor),
         ])
-        didMove(toParentViewController: parent)
+        didMove(toParent: parent)
     }
 }
 

@@ -21,11 +21,25 @@ class PatientDetailsViewController: BaseViewController {
     }()
     
     private var provider: DetailsCollectionProvider!
-
+    @IBOutlet weak var addNewButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         bind(model: patientInfo)
         provider = DetailsCollectionProvider(collectionView: collectionView, info: patientInfo)
+        
+    }
+    
+    func showAddButton(){
+        if AgoraRtm.rtmChannel == nil {
+            self.addNewButton.isHidden = true
+        }else{
+            self.addNewButton.isHidden = false
+        }
+    }
+    @IBAction func addPateint(_ sender: UIButton) {
+        
+        self.patientInfo.save()
     }
     
     func clearPatientInfo() {
@@ -68,6 +82,6 @@ extension PatientDetailsViewController: Bindable {
             else {
                 self?.hideProgressHUD()
             }
-        }).disposed(by: disposeBag)
+        }).disposed(by: disposeBag)        
     }
 }

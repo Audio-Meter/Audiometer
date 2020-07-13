@@ -22,10 +22,12 @@ class CodeTableProvider: TableProvider {
             rows.bind(table.reused(cell: ReportCodeCell.self), configure: { (item, cell) in
                 cell.name.text = item.name
                 cell.value.isOn = item.value.value
+                cell.value.onTintColor = #colorLiteral(red: 0.2941176471, green: 0.5254901961, blue: 0.7058823529, alpha: 1)
                 item.value.value = item.value.value
+                
                 cell.value.isUserInteractionEnabled = !(item.type == .icd9 || item.type == .icd10)
                 
-                cell.value.rx.controlEvent(UIControlEvents.valueChanged).bind(onNext: { _ in
+                cell.value.rx.controlEvent(UIControl.Event.valueChanged).bind(onNext: { _ in
                     switch item.type{
                     case .cpt:
                         if let index = report.cpt.index(where: {$0.0.fullName == item.name}) {

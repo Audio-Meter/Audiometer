@@ -5,11 +5,14 @@
 //  Created by Sergey Kachan on 1/30/18.
 //  Copyright © 2018 Sergey Kachan. All rights reserved.
 //
-
+    
 import UIKit
 import IQKeyboardManagerSwift
 import Apollo
 import CoreData
+import AVFoundation
+import Firebase
+import FirebaseCrashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -29,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
 
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         IQKeyboardManager.shared.enable = true
         UINavigationBar.appearance().tintColor = UIColor.white
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor : UIColor.white]
@@ -38,16 +41,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 //        if let rootVC = window?.rootViewController as? ViewController {
 //        }
+        FirebaseApp.configure()
+        
+        if #available(iOS 13.0, *) {
+            window?.overrideUserInterfaceStyle = .light
+        }
 
+        AVCaptureDevice.requestAccess(for: .video) { (success) in
+            
+        }
+        AVCaptureDevice.requestAccess(for: .audio) { (success) in
+            
+        }
+        
+        AVAudioSession.sharedInstance().requestRecordPermission { (success) in
+            
+        }
+        
         let storage = Storage(storage: self.persistentContainer)
         guard let userEmail = Storage.currentUser() else {
+            self.setRootNotLogin()
             return true
         }
-
-        if (!userEmail.isEmpty && storage.getUserByEmail(userEmail) != nil) {
-            let rootVC = MenuViewController.viewController
-            self.window?.rootViewController = rootVC
+        if UIDevice.current.isIPAD(){
+            if (!userEmail.isEmpty && storage.getUserByEmail(userEmail) != nil) {
+                self.setMenuVC()
+            }else{
+                self.setwelcomeRootVC()
+            }
+        }else{
+            setIphoneRootVc()
         }
+        
+        
+        
 //        if ApolloClient.isAuthorized {
 //            let rootVC = MenuViewController.viewController
 ////            rootVC.container = persistentContainer
@@ -56,6 +83,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        }
 
         return true
+    }
+    func setMenuVC(){
+        let rootVC = MenuViewController.viewController
+        self.window?.rootViewController = rootVC
+    }
+    
+    func setRootNotLogin(){
+        if UIDevice.current.isIPAD(){
+            self.setwelcomeRootVC()
+        }else{
+            setIphoneRootVc()
+        }
+    }
+    
+    func setwelcomeRootVC(){
+        let rootVC = WelcomeViewController.viewController
+        self.window?.rootViewController = rootVC
+    }
+    
+    func setIphoneRootVc(){
+        let rootVc = PatientMainScreenViewController.viewController
+        self.window?.rootViewController = rootVc
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

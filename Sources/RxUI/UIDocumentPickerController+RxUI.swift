@@ -56,8 +56,8 @@ class RxDocumentPickerController: UIDocumentPickerViewController, UIDocumentPick
     }
     
 
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
             return
         }
         images.onNext(image)
@@ -74,7 +74,7 @@ extension Navigator {
         }
         picker.allowsEditing = false
         picker.delegate = picker
-        picker.sourceType = UIImagePickerControllerSourceType.camera
+        picker.sourceType = UIImagePickerController.SourceType.camera
         picker.cameraCaptureMode = .photo
         picker.modalPresentationStyle = .fullScreen
         self.present(picker)

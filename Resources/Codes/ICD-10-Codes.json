@@ -470,4 +470,8 @@
 {"title":"Z46.1", "description":"Encounter for fitting and adjustment of hearing aid"},
 {"title":"Z01.110", "description":"Encounter for hearing examination following failed hearing screening"},
 {"title":"Z01.12", "description":"Encounter for hearing conservation and treatment"},
-{"title":"Z13.850", "description":"Encounter for screening for traumatic brain injury"}]
+{"title":"Z13.850", "description":"Encounter for screening for traumatic brain injury"},
+
+{"title":"R40-R46","description" : "Symptoms and signs involving cognition, perception, emotional state and behavior"},
+{"title":"G31.84","description":"Mild cognitive impairment"}
+]

@@ -28,7 +28,7 @@ struct ColorStyle {
     static let green = wrap(#colorLiteral(red: 0.2980392157, green: 0.8509803922, blue: 0.3921568627, alpha: 1))
     static let black = wrap(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
     static let lightBlack = wrap(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1))  //333333
-
+//75.0/255.0, green: 134.0/255.0, blue: 180.0/255.0, alpha: 1.0)
     static let lighterGray = wrap(#colorLiteral(red: 0.9725490196, green: 0.9725490196, blue: 0.9725490196, alpha: 1)) //F8F8F8
     static let lightGray = wrap(#colorLiteral(red: 0.9450980392, green: 0.9450980392, blue: 0.9450980392, alpha: 1))   //F1F1F1
     static let stupidGray = wrap(#colorLiteral(red: 0.9254901961, green: 0.9254901961, blue: 0.9254901961, alpha: 1))  //ECECEC

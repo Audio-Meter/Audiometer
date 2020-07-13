@@ -11,5 +11,8 @@ import Foundation
 
 class WelcomeViewController: BaseViewController {
     
+    class var viewController: WelcomeViewController{
+        return UIStoryboard.authenticationStoryboard.instantiateViewController(withIdentifier: "WelcomeViewController") as!  WelcomeViewController
+    }
     
 }

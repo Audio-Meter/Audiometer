@@ -87,7 +87,11 @@ extension DetailsCollectionProvider: UICollectionViewDataSource {
                 patientPageItem.selectedIndex.asObservable().subscribe(onNext: { [weak cell] value in
                     cell?.segmentedControl.selectedSegmentIndex = (value == .m ? 0 : 1)
                 }).disposed(by: cell.disposeBag)
-
+                cell.segmentedControl.layer.cornerRadius = 15
+                cell.segmentedControl.layer.borderWidth = 1
+                cell.segmentedControl.clipsToBounds = true
+                
+                cell.segmentedControl.removeBorders()
                 return cell
             }
         }
@@ -126,6 +130,6 @@ extension DetailsCollectionProvider: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(0, indent, 0, indent)
+        return UIEdgeInsets(top: 0, left: indent, bottom: 0, right: indent)
     }
 }

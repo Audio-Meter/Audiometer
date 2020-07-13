@@ -28,11 +28,11 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>I need your camera</string>
+	<string>To have a video call with patient</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>I need your microphone</string>
+	<string>To have a call with patient</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>To choose a photo of a patient&apos;s referral</string>
+	<string>To choose a photo of a patient's referral</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SF-Pro-Text-Regular.otf</string>
@@ -47,6 +47,8 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Authentication</string>
+	<key>UIMainStoryboardFile~ipad</key>
+	<string>PatientVideo</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

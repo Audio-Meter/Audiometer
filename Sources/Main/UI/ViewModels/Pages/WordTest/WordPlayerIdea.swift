@@ -13,6 +13,7 @@ class WordPlayerIdea {
     let test: TestIdea
     let conductionIdea: ConductionIdea
     let type = Variable(SpeechType.srt)
+    let srtSdType = Variable(IndexPath(row: 0, section: 0))
     let word: Variable<Word?> = Variable(nil)
     let syncService = SyncAudioManager()
     var currentCategoryIndex = Variable(0)
@@ -22,6 +23,16 @@ class WordPlayerIdea {
         self.conductionIdea = conductionIdea
     }
 
+    var typeVariable: Observable<Void> {
+        return srtSdType.asObservable().map {
+            switch $0.row {
+                case 0: self.type.value = SpeechType.srt
+                case 1: self.type.value = SpeechType.sd
+                default: break
+            }
+        }
+    }
+    
     func syncAudio(completion: @escaping (Error?) -> ()) {
         syncService.syncAudio { [weak self] (error) in
             self?.test.app.words.updateCategories()
@@ -70,6 +81,8 @@ class WordPlayerIdea {
             return list[index + 1]
         }
     }
+    
+    
 
     var wordChanged: Observable<Void> {
         return word.asObservable().void()

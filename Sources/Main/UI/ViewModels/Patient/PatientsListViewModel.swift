@@ -36,6 +36,17 @@ class PatientsListViewModel {
         }
     }
     
+    func searchPatient(text: String) -> PatientInfo?{
+        guard text.isEmpty == false else {
+            patients.value = allPatients
+            return nil
+        }
+        let filteredPatients = allPatients.filter { (item) -> Bool in
+            return item.fullName.lowercased().contains(text.lowercased())
+        }
+        return filteredPatients.first
+    }
+    
     func searchPatients(text: String) {
         guard text.isEmpty == false else {
             patients.value = allPatients

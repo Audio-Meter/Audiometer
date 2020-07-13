@@ -9,7 +9,7 @@
 import UIKit
 
 enum Channel: Int, Codable {
-    case left, right
+    case left, right, binaural
 
     var pan: Double {
         switch self {
@@ -17,6 +17,7 @@ enum Channel: Int, Codable {
             return -1
         case .right:
             return 1
+        case .binaural : return 0
         }
     }
 
@@ -24,6 +25,7 @@ enum Channel: Int, Codable {
         switch self {
         case .left: return .blue
         case .right: return .red
+        case .binaural : return .white
         }
     }
 
@@ -31,15 +33,11 @@ enum Channel: Int, Codable {
         switch self {
         case .left: return "left"
         case .right: return "right"
+        case .binaural: return "binaural"
         }
     }
 
     func applyTo(pan: Double) -> Double {
-        if self.pan == pan {
-            return pan
-        } else if self.pan == -pan {
-            return 0
-        }
-        return -self.pan
+        return self.pan
     }
 }

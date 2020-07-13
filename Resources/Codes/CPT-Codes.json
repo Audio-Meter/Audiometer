@@ -17,5 +17,26 @@
  {"title": "CPT: 92596 Ear protector attenuation measures"},
  {"title": "CPT: 92620 Evaluation of central auditory function, with report; initial 60 minutes"},
  {"title": "CPT: 92621 Evaluation of central auditory function, with report; each additional 15 minutes"},
- {"title": "CPT: 92625 Assessment of tinnitus (includes pitch, loudness matching and masking)"}
+ {"title": "CPT: 92625 Assessment of tinnitus (includes pitch, loudness matching and masking)"},
+ {"title": "CAPT: CPT: 69210 * 69 Cerumen Removeal  Left  Right"},
+ {"title": "CPT: 92567 Tympanometry"},
+ {"title": "CPT: 92625 Tinnitus Evaluation"},
+ {"title": "CPT: 92633 Counseling/Aural Rehab."},
+ {"title": "CPT: 92954 Electroacoustic Analysis 1 HA"},
+ {"title": "CPT: 92955 Electroacoustic Analysis 2 HA’s"},
+ {"title": "CPT: 92590 HA Selection, Monaural"},
+ {"title": "CPT: 92591 HA Selection, Binaural"},
+ {"title": "CPT: 99203 New Consultation"},
+ {"title": "CPT: 99213 Office Visit"},
+ {"title": "CPT: V5010 Assessment"},
+ {"title": "CPT: V5011 Fitting/Orientation  Monaural  Binaural"},
+ {"title": "CPT: V5014 Modification/Repair  Left  Right"},
+ {"title": "CPT: V5020 Conformity Exam/Verification  Left  Right"},
+ {"title": "CPT: V5160 Dispensing without Accessory  Binaural"},
+ {"title": "CPT: V5160*22 Dispensing with Accessory  Binaural"},
+ {"title": "CPT: V5241 Dispensing without Accessory  Monaural"},
+ {"title": "CPT: V5241*22 Dispensing with Accessory  Monaural"},
+ {"title": "CPT:  99483 Evaluation of a new or existing patient, who exhibits signs and/or symptoms of cognitive impairment"},
+ {"title": "CPT: 96127 Standardized screening instrument that will provide both scoring and further documentation to the healthcare provider"}
+ 
 ]

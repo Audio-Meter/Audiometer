@@ -13,7 +13,7 @@ private let jpegMimePrefix = "data:image/jpeg;base64,"
 
 extension String {
     static func base64StringForApi(image: UIImage) -> String? {
-        guard let imageData = UIImageJPEGRepresentation(image, 0.8) else {
+        guard let imageData = image.jpegData(compressionQuality: 0.8) else {
             return nil
         }
         let base64String = imageData.base64EncodedString(options: .lineLength64Characters)
@@ -60,7 +60,7 @@ extension String {
 }
 
 extension Tests {
-    static let allTypes = [tone, speech]
+    static let allTypes = [tone, speech , tinnitus , minicog]
     
     var title: String {
         switch self {
@@ -68,6 +68,10 @@ extension Tests {
             return "AC/BC"
         case .speech:
             return "SRT/SD"
+        case .tinnitus:
+            return "Tinnitus"
+        case .minicog:
+            return "minicog"
         case .__unknown(_):
             return ""
         }
@@ -79,6 +83,10 @@ extension Tests {
             return "Tone Tests"
         case .speech:
             return "Speech Tests"
+        case .tinnitus:
+            return "Tinnitus Test"
+        case .minicog:
+            return "Mini-Cog Test"
         case .__unknown(_):
             return ""
         }

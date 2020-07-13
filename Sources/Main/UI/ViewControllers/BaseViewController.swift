@@ -19,7 +19,7 @@ class BaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UIBarButtonItem.appearance().setTitleTextAttributes( [NSAttributedStringKey.font: FontStyle.normal.apply()], for: .normal)
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.font: FontStyle.normal.apply()]
+        UIBarButtonItem.appearance().setTitleTextAttributes( [NSAttributedString.Key.font: FontStyle.normal.apply()], for: .normal)
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: FontStyle.normal.apply()]
     }
 }
