@@ -13,6 +13,6 @@ class ClinicCell: UITableViewCell {
     
     @IBOutlet weak var nameField: UILabel!
     
-    @IBOutlet weak var checkbox: BEMCheckBox!
+    @IBOutlet weak var bmcheckbox: BEMCheckBox!
 
 }

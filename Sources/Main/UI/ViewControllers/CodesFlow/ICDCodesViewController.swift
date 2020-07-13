@@ -26,7 +26,7 @@ class MedicalCodesViewController : BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(ICDTableViewCell.nib, forCellReuseIdentifier: ICDTableViewCell.reuseIdentifier)
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         
         codesNameLabel.text = self.title
         navigationItem.title = self.title

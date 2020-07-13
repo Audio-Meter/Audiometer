@@ -10,8 +10,9 @@ import UIKit
 import LGButton
 import RxSwift
 import RxCocoa
+import AgoraRtmKit
 
-class CalibrationViewController: BaseViewController {
+class CalibrationViewController: BaseViewController, CallDelegate {
     @IBOutlet var type: UISegmentedControl!
     @IBOutlet var pan: ChannelsView!
     @IBOutlet var frequency: UISegmentedControl!
@@ -34,14 +35,14 @@ class CalibrationViewController: BaseViewController {
     let tonePlayer = TonePlayer()
     let wordPlayer = WordPlayer()
     let noisePlayer = MaskingPlayer()
-    
-    
+    var callObsever:Any?
+    var remoteVC:SelectRemoteViewController?
 
     let transducerController = TransducerPickerController()
 
     @IBOutlet weak var lblVersion: UILabel!
     var typeIndexpath: IndexPath = IndexPath(row: 0, section: 0)
-    var lrIndexpath: IndexPath = IndexPath(row: 0, section: 0)
+    var lrIndexpath: [IndexPath] = [IndexPath(row: 0, section: 0)]
     var frequencyIndexpath: IndexPath = IndexPath(row: 0, section: 0)
     var stepIndexpath: IndexPath = IndexPath(row: 0, section: 0)
     
@@ -51,9 +52,23 @@ class CalibrationViewController: BaseViewController {
         
         appDelegate.isFromCalibration = true
         
+        
+        
         transducerController.attach(to: transducerPlace)
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "CLOSE", style: .plain, target: self, action: #selector(closeAction))
+          let font = UIFont.systemFont(ofSize: 20)
+         let attrs = [
+                    NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Bold", size: 20)!
+                ]
+        
+         UINavigationBar.appearance().titleTextAttributes = attrs
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(closeAction))
+        
+        navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: font], for: .normal)
+        
+        navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: font], for: .normal)
+        
         
         if let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String {
             lblVersion.text = "Version: \(appVersion)\n"
@@ -68,6 +83,34 @@ class CalibrationViewController: BaseViewController {
 
         //self.type.setBackgroundImage(image, for: .selected, barMetrics: .default)
         //self.type.backgroundImage(for: .selected, barMetrics: .default)
+        callObsever = NotificationCenter.default.addObserver(self, selector: #selector(recieveCall), name: NSNotification.Name.receiveCall, object: nil)
+    }
+    
+    deinit {
+    if let call = callObsever{
+            NotificationCenter.default.removeObserver(call)
+        }
+    }
+    
+    @objc func recieveCall(_ notification:Notification){
+//        if self.navigationController?.topViewController == nil{
+            remoteVC = SelectRemoteViewController.viewController
+            if let channel = notification.object as? AgoraRtmChannel{
+                remoteVC?.channel = channel
+            }
+            DispatchQueue.main.async {
+                self.remoteVC?.showViewForParent(self)
+            }
+            remoteVC?.callDelegate = self
+//        }
+    }
+    func cancelTapped() {
+        
+    }
+    
+    func confirmCallTapped() {
+        self.closeAction()
+        NotificationCenter.default.post(name: Notification.Name.startCall, object: nil)
     }
     
     @objc func closeAction() {
@@ -161,33 +204,39 @@ extension CalibrationViewController: Bindable {
         let conductionModel = model.conductionIdea
         
         let channels = Observable.just(["L","R"])
+       
         channels
             .bind(to: self.lnrCollectionView.rx.items) { (collectionView, row, element) in
            let indexPath = IndexPath(row: row, section: 0)
            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CalibrationCollectionViewCell", for: indexPath) as! CalibrationCollectionViewCell
                 cell.subTitle.text = element
-                cell.selectedImage.image = indexPath == self.lrIndexpath ? UIImage(named: "01") : UIImage(named: "02")
+                if self.lrIndexpath.contains(indexPath){
+                    cell.selectedImage.image = UIImage(named: "01")
+                }else{
+                    cell.selectedImage.image = UIImage(named: "02")
+                }
             return cell
         }.disposed(by: disposeBag)
         
-        lnrCollectionView.rx.itemSelected.bind(to: conductionModel.conductionIndexPath).disposed(by: disposeBag)
-        
-        conductionModel.conductionIndexPath.asObservable().subscribe { (event) in
-                if let item = event.element{
-                    self.lrIndexpath = item
-                    self.lnrCollectionView.reloadData()
+        lnrCollectionView.rx.itemSelected.asObservable().subscribe { (event) in
+            if let item = event.element{
+                if self.lrIndexpath.filter({ $0.row == item.row}).count == 0{
+                    self.lrIndexpath.append(item)
+                    conductionModel.conductionIndexPath.value.append(item)
+                }else if self.lrIndexpath.count > 1, let index = self.lrIndexpath.index(of: item){
+                    self.lrIndexpath.remove(at: index)
+                    conductionModel.conductionIndexPath.value.remove(at: index)
                 }
+                   self.lnrCollectionView.reloadData()
+            }
+            
         }.disposed(by: disposeBag)
         
+        
+        
+        
+        
         conductionModel.type ||> disposeBag
-            
-        
-    
-        
-//left.rx.tap ||> { .left } ||> model.channel ||> disposeBag
-//right.rx.tap ||> { .right } ||> model.channel ||> disposeBag
-//model.left ||> Styles.button.updateImage ||> left ||> disposeBag
-//model.right ||> Styles.button.updateImage ||> right ||> disposeBag
         
         model.isFrequencyEnabled ||> frequencyCollectionView.rx.isUserInteractionEnabled ||> disposeBag
         model.frequencyDidDisabled ||> model.setDefaultFrequency ||> disposeBag

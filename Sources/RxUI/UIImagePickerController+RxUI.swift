@@ -14,13 +14,13 @@ class RxImagePickerController: UIImagePickerController, UIImagePickerControllerD
     let images = PublishSubject<UIImage>()
     let files = PublishSubject<String>()
 
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
             return
         }
         images.onNext(image)
 
-        let jpeg = UIImageJPEGRepresentation(image, 1)
+        let jpeg = image.jpegData(compressionQuality: 1)
         let f = jpeg!.base64EncodedString()
         files.onNext(f)
 
@@ -35,7 +35,7 @@ extension Navigator {
         }
 //        picker.allowsEditing = false
         picker.delegate = picker
-        picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        picker.sourceType = UIImagePickerController.SourceType.photoLibrary
 //        picker.cameraCaptureMode = .photo
 //        picker.modalPresentationStyle = .fullScreen
         present(picker)

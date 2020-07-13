@@ -101,20 +101,21 @@ class PatientPage: DetailsItemsCellsProtocol {
     
     func items() -> [DetailItemCellProtocol] {
         return [
-            DetailsCellStringItem(variable: firstName, description: "FIRST NAME", format: .wordCap),
-            DetailsCellStringItem(variable: lastName, description: "LAST NAME", format: .wordCap),
-            DetailsCellDateItem(variable: dateOfBirth, description: "DOB: MONTH, DAY, YEAR"),
-            DetailsCellSegmentedItem(selectedIndex: gender, description: "GENDER", type: .segmentControl, segmentTitles: ["MALE", "FEMALE"]),
-            DetailsCellStringItem(variable: email, description: "EMAIL"),
-            DetailsCellStringItem(variable: mailingAddress1, description: "MAILING ADDRESS 1"),
-            DetailsCellStringItem(variable: mailingAddress2, description: "MAILING ADDRESS 2"),
-            DetailsCellStringItem(variable: city, description: "CITY", format: .wordCap),
-            DetailsCellStringItem(variable: state, description: "STATE/PROVINCE", format: .allCap),
-            DetailsCellStringItem(variable: zip, description: "ZIP/POSTAL CODE"),
-            DetailsCellStringItem(variable: phoneNUmber, description: "PHONE"),
-            DetailsCellStringItem(variable: patientId, description: "Patient ID".uppercased()),
-            DetailsCellStringItem(variable: socialSecurityNumber, description: "Social Security Number".uppercased(), format: .hyphen("xxx-xx-xxxx")),
-            DetailsCellStringItem(variable: insurance, description: "Insurance".uppercased())
+            DetailsCellStringItem(variable: firstName, description: "First Name", format: .wordCap),
+            DetailsCellStringItem(variable: lastName, description: "Last Name", format: .wordCap),
+            DetailsCellDateItem(variable: dateOfBirth, description: "Date of Birth"),
+            DetailsCellSegmentedItem(selectedIndex: gender, description: "Gender", type: .segmentControl, segmentTitles: ["Male", "Female"]),
+            DetailsCellStringItem(variable: email, description: "Email ID"),
+            DetailsCellStringItem(variable: mailingAddress1, description: "Mailing Address 1"),
+            DetailsCellStringItem(variable: mailingAddress2, description: "Mailing Address 2"),
+            DetailsCellStringItem(variable: city, description: "City", format: .wordCap),
+            DetailsCellStringItem(variable: state, description: "State/province", format: .allCap),
+            DetailsCellStringItem(variable: zip, description: "Zip/post code"),
+            DetailsCellStringItem(variable: phoneNUmber, description: "Phone"),
+            DetailsCellStringItem(variable: patientId, description: "Authorization#"),
+            DetailsCellStringItem(variable: socialSecurityNumber, description: "SS#: XXX-XX-", format: .hyphen("xxx-xx-xxxx")),
+            DetailsCellStringItem(variable: insurance, description: "Insurance#")
+            
         ]
     }
     
@@ -148,7 +149,7 @@ class PatientPage: DetailsItemsCellsProtocol {
             icd_9: icd_9.value,
             icd_10: icd_10.value)
         loading.value = true
-        if patientDetails != nil {
+        if patientDetails != nil, info.id != ""{
             service.editPatient(info: info, completion: { [weak self] (requestError) in
                 self?.loading.value = false
                 guard requestError == nil else {

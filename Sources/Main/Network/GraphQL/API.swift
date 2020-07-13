@@ -753,6 +753,10 @@ public enum Tests: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.J
   case tone
   /// Speech
   case speech
+  /// Tinnitus
+  case tinnitus
+  /// Mini-Cog
+  case minicog
   /// Auto generated constant for unknown enum values
   case __unknown(RawValue)
 
@@ -760,6 +764,8 @@ public enum Tests: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.J
     switch rawValue {
       case "tone": self = .tone
       case "speech": self = .speech
+      case "tinnitus": self = .tinnitus
+      case "minicog": self = .minicog
       default: self = .__unknown(rawValue)
     }
   }
@@ -768,6 +774,8 @@ public enum Tests: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.J
     switch self {
       case .tone: return "tone"
       case .speech: return "speech"
+      case .tinnitus: return "tinnitus"
+      case .minicog: return "minicog"
       case .__unknown(let value): return value
     }
   }
@@ -776,6 +784,8 @@ public enum Tests: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.J
     switch (lhs, rhs) {
       case (.tone, .tone): return true
       case (.speech, .speech): return true
+      case (.tinnitus, .tinnitus): return true
+      case (.minicog, .minicog): return true
       case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
       default: return false
     }
@@ -785,6 +795,8 @@ public enum Tests: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.J
     return [
       .tone,
       .speech,
+      .tinnitus,
+      .minicog,
     ]
   }
 }

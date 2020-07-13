@@ -12,18 +12,31 @@ class ToneTestPage {
     let app: App
 
     let audiogramVar = Variable(Audiogram())
-    let frequencyModel = SteppedViewModel(possibleValues: Metric.frequencies, value: 1500)
-    let amplitudeModel = SteppedViewModel(possibleValues: Metric.amplitudes, value: 50)
+    let frequencyModel = SteppedViewModel(type: .button, possibleValues: Metric.frequencies, value: 1500)
+    let amplitudeModel = SteppedViewModel(type: .slider,possibleValues: Metric.amplitudes, value: 50)
     let transducerModel: TransducerPickerIdea
     let playedVar = Variable(false)
     var report: Report
+
+    var viewModel:PreviousTestsViewModel
+    
+    
+    func setViewModel(vModel:PreviousTestsViewModel){
+        self.viewModel = vModel
+    }
+
+    func getViewModel()->PreviousTestsViewModel{
+        return self.viewModel
+    }
+    
     private let patientId: String
 
-    init(app: App, patientId: String, report: Report) {
+    init(app: App, patientId: String, report: Report,ViewModel:PreviousTestsViewModel) {
         self.app = app
         self.transducerModel = TransducerPickerIdea(app: app)
         self.patientId = patientId
         self.report = report
+        self.viewModel = ViewModel
     }
 
     var frequency: Observable<Int> {
@@ -56,9 +69,19 @@ class ToneTestPage {
     func pause() {
         playedVar.value = false
     }
+    
+    func toggle() {
+        playedVar.value = !playedVar.value
+    }
+    
 
     var playButton: Observable<ButtonIdea> {
         return playedVar.asObservable().map { $0 ? .stop : .play }
+    }
+    func pause2(taps: Observable<Void>) -> Disposable {
+        return taps.scan(to: playedVar) { played, _ in
+            return !played
+        }
     }
 
     func passed() -> Bool {

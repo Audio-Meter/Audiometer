@@ -30,8 +30,8 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         #endif
         UITransparentView()
         
-        UIBarButtonItem.appearance().setTitleTextAttributes( [NSAttributedStringKey.font: FontStyle.normal.apply()], for: .normal)
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.font: FontStyle.normal.apply()]
+        UIBarButtonItem.appearance().setTitleTextAttributes( [NSAttributedString.Key.font: FontStyle.normal.apply()], for: .normal)
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: FontStyle.normal.apply()]
         
         if let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String {
             lblVersion.text = "Version: \(appVersion)\n"
@@ -79,7 +79,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     }
     
     @IBAction func onResetTapped(_ sender: Any) {
-        let alert = UIAlertController(title: "Forgot password?", message: "Enter your email and we'll send you a temporary password", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Forgot password?", message: "Enter your email and we'll send you a temporary password", preferredStyle: UIAlertController.Style.alert)
         alert.addTextField(configurationHandler: {(_ textField: UITextField) -> Void in
             textField.placeholder = "Enter your email..."
             textField.keyboardType = .emailAddress

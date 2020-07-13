@@ -12,8 +12,8 @@ import RxCocoa
 import RxOptional
 
 class AudiogramView: UIView {
-    let lightColor = #colorLiteral(red: 0.6980392157, green: 0.6980392157, blue: 0.6980392157, alpha: 1)
-    let darkColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
+    let lightColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    let darkColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
 
     @IBOutlet var grid: AudiogramGridView!
     let chart = ChartView()
@@ -24,7 +24,7 @@ class AudiogramView: UIView {
         super.init(frame: .zero)
 
         backgroundColor = .clear
-        flex.width(546).height(450)
+        flex.width(546).height(400)
         flex.addItem(grid).marginLeft(55).marginTop(50).width(400).height(360)
 
         awakeFromNib()
@@ -96,7 +96,7 @@ class AudiogramView: UIView {
 }
 
 class AmpLabel: UIView {
-    let lightColor = #colorLiteral(red: 0.6980392157, green: 0.6980392157, blue: 0.6980392157, alpha: 1)
+    let lightColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
 
     func configure(grid: UIView) {
         translatesAutoresizingMaskIntoConstraints = false

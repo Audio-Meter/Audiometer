@@ -44,7 +44,14 @@ struct MedicalCodeService {
             [kTitle: "Additional Audiometric Tests"],
             [kTitle: "Amplification"],
             [kTitle: "Cerumen Removal"],
-            ]
+            [kTitle: "Refer to ENT"],
+            [kTitle: "Hearing Aids"],
+            [kTitle: "OAE's"],
+            [kTitle: "ENG/VNG"],
+            [kTitle: "Tympanogram"],
+            [kTitle: "Stenger"],
+            [kTitle: "Tone Decay"],
+            [kTitle: "Auditory Processing testing"]]
         return MedicalCodeService.parseCodes(dictionary: dictionary, table: .recommendation)
     }()
     

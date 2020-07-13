@@ -22,12 +22,24 @@ class AudioManager {
     }
 
     func start() {
+        do {
+            try AudioKit.stop()
+        } catch {
+            
+        }
+        
         AudioKit.output = node
         do {
             try AudioKit.start()
         } catch {
             
         }
+        AKSettings.enableLogging = false
+//        do {
+//            try AKSettings.setSession(category: AKSettings.SessionCategory.ambient, with: AVAudioSession.CategoryOptions.interruptSpokenAudioAndMixWithOthers)
+//        } catch {
+//            print("failed to set category")
+//        }
     }
 
     func stop() {
@@ -39,6 +51,8 @@ class AudioManager {
         
         AudioKit.output = nil
     }
+    
+    
 }
 
 func ||>(controller: UIViewController, manager: AudioManager) -> Disposable {

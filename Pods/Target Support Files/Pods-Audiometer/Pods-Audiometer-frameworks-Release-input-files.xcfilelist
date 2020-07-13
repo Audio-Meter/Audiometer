@@ -1,0 +1,23 @@
+${PODS_ROOT}/Target Support Files/Pods-Audiometer/Pods-Audiometer-frameworks.sh
+${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework
+${BUILT_PRODUCTS_DIR}/Apollo/Apollo.framework
+${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework
+${BUILT_PRODUCTS_DIR}/Charts/Charts.framework
+${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework
+${BUILT_PRODUCTS_DIR}/EPSignature/EPSignature.framework
+${BUILT_PRODUCTS_DIR}/FlexLayout/FlexLayout.framework
+${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework
+${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework
+${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework
+${BUILT_PRODUCTS_DIR}/LGButton/LGButton.framework
+${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework
+${BUILT_PRODUCTS_DIR}/PinLayout/PinLayout.framework
+${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework
+${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework
+${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework
+${BUILT_PRODUCTS_DIR}/RxOptional/RxOptional.framework
+${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework
+${BUILT_PRODUCTS_DIR}/RxSwiftExt/RxSwiftExt.framework
+${BUILT_PRODUCTS_DIR}/VerticalSteppedSlider/VerticalSteppedSlider.framework
+${BUILT_PRODUCTS_DIR}/WARangeSlider/WARangeSlider.framework
+${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework

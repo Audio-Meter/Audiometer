@@ -10,8 +10,9 @@ import UIKit
 import os
 import CoreData
 import EPSignature
+import AgoraRtmKit
 
-class ClinicClinicianViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, EPSignatureDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ClinicClinicianViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, EPSignatureDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CallDelegate {
     
     // MARK: - instance member
     var clinics: [LocalClinic] = []
@@ -47,13 +48,24 @@ class ClinicClinicianViewController: BaseViewController, UITableViewDelegate, UI
     @IBOutlet weak var clinicianSaveBtn: UIButton!
     @IBOutlet weak var clinicDeleteBtn: UIButton!
     @IBOutlet weak var clinicianDeleteBtn: UIButton!
+    var callObsever:Any?
+    var remoteVC:SelectRemoteViewController?
+    
     // MARK: - bind events
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UIBarButtonItem.appearance().setTitleTextAttributes( [NSAttributedStringKey.font: FontStyle.normal.apply()], for: .normal)
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.font: FontStyle.normal.apply()]
+        UIBarButtonItem.appearance().setTitleTextAttributes( [NSAttributedString.Key.font: FontStyle.normal.apply()], for: .normal)
+        
+        callObsever = NotificationCenter.default.addObserver(self, selector: #selector(recieveCall), name: NSNotification.Name.receiveCall, object: nil)
+
+        
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: FontStyle.normal.apply()]
+        
+        
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+
         
         clinicTableView.delegate = self
         clinicianTableView.delegate = self
@@ -69,7 +81,81 @@ class ClinicClinicianViewController: BaseViewController, UITableViewDelegate, UI
         self.clinicians = storage.fetchClinicians()
         self.clinicianTableView.reloadData()
         
+        let service: CliniciansService = CliniciansService()
+        service.fetchClinicians { (_clinicians, error) in
+            print(_clinicians)
+            print(error?.localizedDescription)
+        };
     }
+    func addCLinicians(){
+        let service: CliniciansService = CliniciansService()
+        var clinician = Clinician()
+        
+        clinician.name = "test"
+        clinician.email = "test@example.com"
+        clinician.degrees = "MBBS"
+        clinician.certification = "Certiifcation"
+        clinician.pcp = true
+        clinician.disabled = true
+        
+        clinician.password = "test123"
+        
+        
+
+        service.createNewClinician(info: clinician, completion: { (id, error)  in
+            var message = ""
+            
+            if let e = error {
+                message = e.localizedDescription
+            } else {
+                if id != nil {
+                    message = "The clinician is added."
+
+                    clinician.id = id
+                    
+                    
+                    
+                } else {
+                    message = "The ID is not returned."
+                }
+            }
+            
+            let messageWindow = UIAlertController(title: message, message: nil, preferredStyle: .alert)
+            messageWindow.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(messageWindow, animated: true)
+        })
+        
+        service.fetchClinicians { (_clinicians, error) in
+            print(_clinicians)
+            print(error?.localizedDescription)
+        };
+    }
+    
+
+        deinit {
+        if let call = callObsever{
+                NotificationCenter.default.removeObserver(call)
+            }
+        }
+        
+        @objc func recieveCall(_ notification:Notification){
+    //        if self.navigationController?.topViewController == nil{
+                remoteVC = SelectRemoteViewController.viewController
+            if let channel = notification.object as? AgoraRtmChannel{
+                remoteVC?.channel = channel
+            }
+                DispatchQueue.main.async {
+                    self.remoteVC?.showViewForParent(self)
+                }
+                remoteVC?.callDelegate = self
+    //        }
+        }
+        
+        func confirmCallTapped() {
+            self.dismiss(animated: false, completion: nil)
+
+            NotificationCenter.default.post(name: Notification.Name.startCall, object: nil)
+        }
     
     @IBAction func clinicianDeleteBtnClicked(_ sender: UIButton) {
         
@@ -125,6 +211,7 @@ class ClinicClinicianViewController: BaseViewController, UITableViewDelegate, UI
             // The last clinic is the new one without saving.
             return
         } else {
+            self.addCLinicians()
             saveClinicAndClinicianSelection()
             
             self.clinicians.append(LocalClinician())
@@ -193,13 +280,13 @@ class ClinicClinicianViewController: BaseViewController, UITableViewDelegate, UI
             
             guard let name = self.clinics[indexPath.row].name else {
                 cell.nameField?.text = ""
-                clinicCheckboxGroup.addCheckBox(toGroup: cell.checkbox)
+                clinicCheckboxGroup.addCheckBox(toGroup: cell.bmcheckbox)
                 return cell
             }
 
-            clinicCheckboxGroup.addCheckBox(toGroup: cell.checkbox)
+            clinicCheckboxGroup.addCheckBox(toGroup: cell.bmcheckbox)
             cell.nameField?.text = name
-            cell.checkbox?.on = storage.isClinicSelected(name: name)
+            cell.bmcheckbox?.on = storage.isClinicSelected(name: name)
             
             return cell
         } else {
@@ -324,12 +411,12 @@ class ClinicClinicianViewController: BaseViewController, UITableViewDelegate, UI
     }
     @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 
-        let key = UIImagePickerControllerEditedImage as NSString
+        let key = UIImagePickerController.InfoKey.editedImage as NSString
         let logoSize = CGSize(width: 340, height: 190)
-        guard let image = info[key] as? UIImage else {
+        guard let image = info[key as UIImagePickerController.InfoKey] as? UIImage else {
             
-            let key = UIImagePickerControllerOriginalImage as NSString
-            guard let image = info[key] as? UIImage else {
+            let key = UIImagePickerController.InfoKey.originalImage as NSString
+            guard let image = info[key as UIImagePickerController.InfoKey] as? UIImage else {
                 dismiss(animated: true, completion: nil)
                 return
             }
@@ -434,7 +521,7 @@ class ClinicClinicianViewController: BaseViewController, UITableViewDelegate, UI
             clinic.fax = clinicFaxField.text
             clinic.address = clinicAddressField.text
             if(clinicSignature.image != nil) {
-                let jpeg = UIImageJPEGRepresentation(clinicSignature.image!, 1)
+                let jpeg = clinicSignature.image!.jpegData(compressionQuality: 1)
                 if(jpeg != nil) {
                     clinic.signature = jpeg! as NSData
                 } else {
@@ -444,7 +531,7 @@ class ClinicClinicianViewController: BaseViewController, UITableViewDelegate, UI
                 clinic.signature = nil
             }
             if(clinicLogo.image != nil) {
-                let jpeg = UIImageJPEGRepresentation(clinicLogo.image!, 1)
+                let jpeg = clinicLogo.image!.jpegData(compressionQuality: 1)
                 if(jpeg != nil) {
                     clinic.logo = jpeg! as NSData
                 } else {
@@ -501,7 +588,7 @@ class ClinicClinicianViewController: BaseViewController, UITableViewDelegate, UI
             clinician.degrees = degreesField.text
             clinician.pcp = pcpField.on
             if(clinicianSignature.image != nil) {
-                let jpeg = UIImageJPEGRepresentation(clinicianSignature.image!, 1)
+                let jpeg = clinicianSignature.image!.jpegData(compressionQuality: 1)
                 if(jpeg != nil) {
                     clinician.signature = jpeg! as NSData
                 } else {
@@ -555,7 +642,7 @@ class ClinicClinicianViewController: BaseViewController, UITableViewDelegate, UI
         for row in 0 ..< rowCount {
             let cell = clinicTableView.cellForRow(at: NSIndexPath(row: row, section: 0) as IndexPath) as! ClinicCell
             
-            let cb = cell.checkbox
+            let cb = cell.bmcheckbox
             let isSelected = cb?.on
             let name = cell.nameField.text
             defaultClinicName = name ?? "";
@@ -603,7 +690,7 @@ class ClinicClinicianViewController: BaseViewController, UITableViewDelegate, UI
         }
 
         list.selectRow(at: index, animated: false,
-                       scrollPosition: UITableViewScrollPosition.bottom)
+                       scrollPosition: UITableView.ScrollPosition.bottom)
         
         self.tableView(list, didSelectRowAt: index)
     }

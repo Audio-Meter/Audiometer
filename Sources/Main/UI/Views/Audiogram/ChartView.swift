@@ -94,8 +94,9 @@ class ChartView: UIView {
     }
 
     private func mark(_ conduction: Conduction, _ masked: Bool, _ passed: Bool, at point: CGPoint) {
-        let image = UIImage(named: conduction.symbol(masked: masked, pass: passed))!
-        let origin = point.offsetBy(dx: -image.size.width / 2, dy: -image.size.height / 2)
-        image.draw(at: origin)
+        if let image = UIImage(named: conduction.symbol(masked: masked, pass: passed)){
+            let origin = point.offsetBy(dx: -image.size.width / 2, dy: -image.size.height / 2)
+            image.draw(at: origin)
+        }        
     }
 }

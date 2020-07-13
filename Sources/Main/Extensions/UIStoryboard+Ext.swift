@@ -32,4 +32,8 @@ extension UIStoryboard {
     class var reportsStoryboard: UIStoryboard {
         return UIStoryboard(name: "Reports", bundle: nil)
     }
+    
+    class var patientVideo:UIStoryboard{
+        return UIStoryboard(name: "PatientVideo", bundle: nil)
+    }
 }

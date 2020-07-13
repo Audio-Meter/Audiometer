@@ -18,7 +18,7 @@ struct SegmentedControlStyle {
         control.titles = titles
         control.tintColor = ColorStyle.blue.apply()
         control.setTitleTextAttributes(
-            [NSAttributedStringKey.font: FontStyle.normal.apply()],
+            [NSAttributedString.Key.font: FontStyle.normal.apply()],
             for: .normal
         )
     }

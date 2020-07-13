@@ -12,19 +12,19 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
 protocol AlertProtocol {
     func showAlert(title: String, message: String, buttonTitle: String)
-    func showAlert(title: String, message: String, actions: [UIAlertAction], preferredStyle: UIAlertControllerStyle)
-    func showAlert(title: String, message: String, actions: [UIAlertAction], preferredAction: UIAlertAction?,  preferredStyle: UIAlertControllerStyle)
+    func showAlert(title: String, message: String, actions: [UIAlertAction], preferredStyle: UIAlertController.Style)
+    func showAlert(title: String, message: String, actions: [UIAlertAction], preferredAction: UIAlertAction?,  preferredStyle: UIAlertController.Style)
     func showTryAgainErrorAlert(title: String, message: String, tryAgain: @escaping () -> ())
 }
 
 extension UIViewController: AlertProtocol {
-    func showAlert(title: String, message: String, actions: [UIAlertAction], preferredStyle: UIAlertControllerStyle) {
+    func showAlert(title: String, message: String, actions: [UIAlertAction], preferredStyle: UIAlertController.Style) {
         showAlert(title: title, message: message, actions: actions, preferredAction: nil, preferredStyle: preferredStyle)
     }
     
     func showAlert(title: String, message: String, buttonTitle: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: buttonTitle, style: UIAlertActionStyle.cancel, handler: nil))
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: buttonTitle, style: UIAlertAction.Style.cancel, handler: nil))
         self.present(alert, animated:true, completion: nil)
     }
     
@@ -32,7 +32,7 @@ extension UIViewController: AlertProtocol {
         showAlert(title: title, message: error.localizedDescription, buttonTitle: "OK")
     }
     
-    func showAlert(title: String, message: String, actions: [UIAlertAction], preferredAction: UIAlertAction?,  preferredStyle: UIAlertControllerStyle) {
+    func showAlert(title: String, message: String, actions: [UIAlertAction], preferredAction: UIAlertAction?,  preferredStyle: UIAlertController.Style) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
         for action in actions {
             alert.addAction(action)

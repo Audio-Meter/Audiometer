@@ -1,0 +1,8 @@
+app_identifier("com.AudiometerVideo.demo") # The bundle identifier of your app
+apple_id("vijaydogra@gmail.com") # Your Apple email address
+
+itc_team_id("53519800") # App Store Connect Team ID
+team_id("84REL8NGV2") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile

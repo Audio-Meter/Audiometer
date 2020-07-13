@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import AgoraRtmKit
+import AgoraRtcKit
 
 class TestTypesViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet var tableView: UITableView!
     var report: Report?
     var items = Tests.allTypes
+    
     
     @IBAction func showReportAction() {
         guard let report = report else { return }
@@ -23,6 +26,7 @@ class TestTypesViewController: BaseViewController, UITableViewDelegate, UITableV
             }
         }
     }
+   
     
     // MARK: - UITableViewDelegate
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -47,7 +51,11 @@ class TestTypesViewController: BaseViewController, UITableViewDelegate, UITableV
         guard let patient = report?.patient else {
             return
         }
-        TestsRouter.showPreviousTests(type: type, patient: patient, from: self, report: report!)
+        TestsRouter.showTest(type: type,
+        patient: patient,
+        from: self,
+        report: report!)
+        //TestsRouter.showPreviousTests(type: type, patient: patient, from: self, report: report!)
     }
  
     class var viewController: TestTypesViewController {

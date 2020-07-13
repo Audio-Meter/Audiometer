@@ -8,12 +8,17 @@
 
 import UIKit
 import RxSwift
+import AgoraRtmKit
+import AgoraRtcKit
 
 class PatientsInfoContainerViewController: BaseViewController {
     let selectedVCIndex = Variable(0)
     let didAddNewPatient = Variable(false)
     var didUpdatePatient: Variable<PatientInfo?> = Variable(nil)
     let didDeletePatient = Variable(false)
+    
+    
+    var rtmChannel:AgoraRtmChannel?
     
     var report = Report() {
         didSet {
@@ -38,7 +43,7 @@ class PatientsInfoContainerViewController: BaseViewController {
     
     private lazy var testsVC: TestTypesViewController = {
         let vc = TestTypesViewController.viewController
-        vc.report = report
+        vc.report = report        
         return vc
     }()
         
@@ -55,10 +60,10 @@ class PatientsInfoContainerViewController: BaseViewController {
         var pageControllerFrame = self.view.bounds
         pageControllerFrame.size.height -= segmentedControl.frame.height
         pageControllerFrame.origin.y = segmentedControl.frame.height
-        self.addChildViewController(pageController)
+        self.addChild(pageController)
         view.addSubview(pageController.view)
         pageController.view.frame = pageControllerFrame
-        pageController.didMove(toParentViewController: self)
+        pageController.didMove(toParent: self)
         
         let items = [SegmentItem(title: "INFORMATION", image: #imageLiteral(resourceName: "Information")),
                      SegmentItem(title: "HISTORY", image: #imageLiteral(resourceName: "hist")),
@@ -69,7 +74,7 @@ class PatientsInfoContainerViewController: BaseViewController {
             self?.showTab(at: index)            
         }
         let lockedIndexSet: IndexSet = [0, 1, 2]
-        patientDetailsVC.view.isUserInteractionEnabled = false
+        patientDetailsVC.view.isUserInteractionEnabled = true
         segmentedControl.lockItems(indexSet: lockedIndexSet)
         showController(at: 0)
     }
@@ -82,7 +87,7 @@ class PatientsInfoContainerViewController: BaseViewController {
         patientDetailsVC.clearPatientInfo()
     }
     
-    func show(patient: PatientInfo?) {
+    func show(patient: PatientInfo?, isExisting:Bool? = false) {
         patientDetailsVC.view.isUserInteractionEnabled = true
         showTab(at: 0)
         report = Report()
@@ -96,6 +101,20 @@ class PatientsInfoContainerViewController: BaseViewController {
                 self.patientDetailsVC.patientInfo.set(patientDetails: patient)
                 self.segmentedControl.unlockAllItems()
             }
+        }else{
+            if AgoraRtm.rtmChannel == nil {
+                self.patientDetailsVC.patientInfo.set(patientDetails: patient)
+                self.segmentedControl.unlockAllItems()
+            }else{
+                self.patientDetailsVC.patientInfo.set(patientDetails: patient)
+                if let existing = isExisting, existing == true{
+                    self.segmentedControl.unlockAllItems()
+                }else{
+                    self.patientDetailsVC.showAddButton()
+                }
+                
+            }
+            
         }
     }
     

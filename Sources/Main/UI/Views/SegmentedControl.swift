@@ -13,7 +13,7 @@ fileprivate class SegmentCollectionViewCell: UICollectionViewCell {
         let res = UIButton()
         res.isUserInteractionEnabled = false
         res.translatesAutoresizingMaskIntoConstraints = false
-        res.imageEdgeInsets = UIEdgeInsetsMake(0, -15, 0, 0)
+        res.imageEdgeInsets = UIEdgeInsets(top: 0, left: -15, bottom: 0, right: 0)
         return res
     }()
     

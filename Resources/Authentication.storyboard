@@ -239,7 +239,7 @@
                                                 <rect key="frame" x="0.0" y="150" width="350" height="50"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="top" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ud-bX-wCE">
-                                                        <rect key="frame" x="140" y="-5" width="200" height="32"/>
+                                                        <rect key="frame" x="140" y="-5" width="200" height="33"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="200" id="55H-of-sye"/>
                                                         </constraints>
@@ -355,7 +355,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d6u-vi-byh" userLabel="LeftColumn">
                                         <rect key="frame" x="0.0" y="0.0" width="500" height="1024"/>
                                         <subviews>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WEn-99-ejm" userLabel="Menus">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WEn-99-ejm" userLabel="Menus">
                                                 <rect key="frame" x="0.0" y="300" width="500" height="360"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -376,11 +376,24 @@
                                                                     <color key="textColor" red="0.29411764709999999" green="0.52549019610000003" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DLT-Pa-r4b">
+                                                                    <rect key="frame" x="20" y="76.5" width="460" height="0.5"/>
+                                                                    <color key="backgroundColor" red="0.29411764709999999" green="0.52549019610000003" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="0.5" id="W7g-dj-B1u"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstItem="0un-tb-O7L" firstAttribute="centerX" secondItem="68H-Sd-7pk" secondAttribute="centerX" id="6LM-Sn-L3c"/>
+                                                                <constraint firstItem="DLT-Pa-r4b" firstAttribute="leading" secondItem="68H-Sd-7pk" secondAttribute="leading" constant="20" symbolic="YES" id="IuQ-eU-wZx"/>
                                                                 <constraint firstItem="0un-tb-O7L" firstAttribute="centerY" secondItem="68H-Sd-7pk" secondAttribute="centerY" id="KgO-ES-Bdc"/>
+                                                                <constraint firstAttribute="bottom" secondItem="DLT-Pa-r4b" secondAttribute="bottom" constant="3" id="Z7u-1W-yNc"/>
+                                                                <constraint firstAttribute="trailing" secondItem="DLT-Pa-r4b" secondAttribute="trailing" constant="20" symbolic="YES" id="ld1-fj-xHj"/>
                                                             </constraints>
                                                         </tableViewCellContentView>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

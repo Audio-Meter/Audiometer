@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AgoraRtmKit
 
 struct TestsRouter {
     static func showPreviousTests(type: Tests, patient: PatientInfo, from: UIViewController, report: Report) {
@@ -24,6 +25,8 @@ struct TestsRouter {
         }
     }
     
+
+   
     static func showHistoryTest(info: TestInfoProtocol, from: UIViewController, report: Report) {
         let storyboard = UIStoryboard.testsStoryboard
         let router = Router(storyboard: storyboard)
@@ -46,13 +49,33 @@ struct TestsRouter {
         let testsPage = TestsPage()
         switch type {
         case .tone:
-            let testPage = testsPage.toneTestPage(patientId: patient.id ?? "", report: report)
+             let viewModel = PreviousACBCTestsViewModel(testType: type, patientInfo: patient, report: report)
+             
+            let testPage = testsPage.toneTestPage(patientId: patient.id ?? "", report: report, viewModel: viewModel)
+            
+             testinfo.SetViewModel(viewModels: viewModel)
+            //type: type, patient: patient, from: self, report: report!)
+            
             let vc = testPage.createController(router: router)
+           
             from.navigationController?.pushViewController(vc, animated: true)
         case .speech:
             let testPage = testsPage.wordTestPage(patientId: patient.id ?? "", report: report)
+            let viewModel = PreviousACBCTestsViewModel(testType: type, patientInfo: patient, report: report)
+            
             let vc = testPage.createController(router: router)
+             testinfo.SetViewModel(viewModels: viewModel)
             from.navigationController?.pushViewController(vc, animated: true)
+        case .tinnitus:
+            NSLog("Hello tinnitus")
+            let vc = router.storyboard.instantiateViewController(withIdentifier: "TinnitusTestViewController") as! TinnitusTestViewController
+             from.navigationController?.pushViewController(vc, animated: true)
+        case .minicog:
+            NSLog("Hello mini cog")
+            //
+            let vc = router.storyboard.instantiateViewController(withIdentifier: "MinicogStep1ViewController") as! MinicogStep1ViewController
+            from.navigationController?.pushViewController(vc, animated: true)
+            
         case .__unknown(let rawValue):
             let alertVC = UIAlertController(title: "Whoops", message: "Can't show test with type \(rawValue)", preferredStyle: .alert)
             let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .default, handler: { (action) -> Void in
@@ -64,3 +87,25 @@ struct TestsRouter {
     }
 }
 
+@IBDesignable
+class StackView: UIStackView {
+   @IBInspectable private var color: UIColor?
+    override var backgroundColor: UIColor? {
+        get { return color }
+        set {
+            color = newValue
+            self.setNeedsLayout()
+        }
+    }
+
+    private lazy var backgroundLayer: CAShapeLayer = {
+        let layer = CAShapeLayer()
+        self.layer.insertSublayer(layer, at: 0)
+        return layer
+    }()
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        backgroundLayer.path = UIBezierPath(rect: self.bounds).cgPath
+        backgroundLayer.fillColor = self.backgroundColor?.cgColor
+    }
+}

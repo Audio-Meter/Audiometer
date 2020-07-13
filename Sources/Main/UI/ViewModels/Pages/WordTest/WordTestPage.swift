@@ -20,7 +20,7 @@ class WordTestPage {
     var report: Report = Report()
     //var category: Variable<[String]> = Variable([])
     private let disposeBag = DisposeBag()
-    
+    let stepIndex = Variable(IndexPath(row:0,section: 0))
     let mclComfortLevelSelected = Variable(false)
     let uclComfortLevelSelected = Variable(false)
     let patientId: String

@@ -28,20 +28,38 @@ class SteppedViewController: BaseViewController {
 
     func attach(to label: UILabel) {
         let parent = label.viewContainingController()!
-        parent.addChildViewController(self)
+        parent.addChild(self)
         parent.view.addSubview(view)
-
+//        parent.view.sendSubviewToBack(<#T##view: UIView##UIView#>)
         NSLayoutConstraint.activate([
-            view.leftAnchor.constraint(equalTo: label.leftAnchor),
-            view.topAnchor.constraint(equalTo: label.bottomAnchor)
+//            view.leftAnchor.constraint(equalTo: label.leftAnchor, constant: 16),
+//            view.rightAnchor.constraint(equalTo: label.rightAnchor, constant: -16),
+            view.centerXAnchor.constraint(equalTo: label.centerXAnchor,constant: 8),
+            view.topAnchor.constraint(equalTo: label.bottomAnchor),
+            view.bottomAnchor.constraint(equalTo: parent.view.bottomAnchor,constant: -70)
+            
         ])
-        didMove(toParentViewController: parent)
+        didMove(toParent: parent)
     }
 }
 
 extension SteppedViewController: Bindable {
     func bind(model: SteppedViewModel) {
-        type.rx.value <||> model.type ||> disposeBag
+        
+        
+        if let typeFreq = model.typeFrequency{
+            type.rx.value <||> typeFreq ||> disposeBag
+            type.setTitle("Button", forSegmentAt: 0)
+            type.setTitle("Slider", forSegmentAt: 1)
+        }
+        
+        if let typeAmpl = model.typeAmplitude{
+            type.rx.value <||> typeAmpl ||> disposeBag
+            type.setTitle("Slider", forSegmentAt: 0)
+            type.setTitle("Button", forSegmentAt: 1)
+        }
+        
+        
         model.sliderSelected ||> sliderView.rx.isShown ||> disposeBag
         model.sliderSelected ||> buttonView.rx.isHidden ||> disposeBag
 
